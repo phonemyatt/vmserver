@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="row">
+    <!-- Login sscreen left -->
+    <div class="col s6">
+      <h3>Login</h3>
+      <form materialize class="col s12">
+        <div class="row">
+          <div class="input-field col s8">
+            <input placeholder="Hey there! you are?" id="loginusername" type="text" class="validate">
+            <label for="loginusername">Username</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s8">
+            <input placeholder="Here comes the password." id="loginpassword" type="password" class="validate">
+            <label for="loginpassword">Password</label>
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+        <div class="row">
+          <button class="btn waves-effect waves-yellow warning-color" type="submit" name="action">Forget Password
+            <i class="material-icons right">priority_high</i>
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- Register screen right -->
+    <div class="col s6">
+      <h3>Registration</h3>
+      <form materialize class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <input placeholder="Username!!!" id="registerusername" type="text" class="validate">
+            <label for="registerusername">Username</label>
+          </div>
+          <div class="input-field col s6">
+            <input placeholder="Birthday" id="registerbirth" type="text" name="registerbirth" class="validate" [(ngModel)]="registerbirth"
+              materialize="pickadate" [materializeParams]="[{selectMonths:true, selectYears:100,format:'dd/mm/yyyy'}]">
+            <label for="registerbirth">Date of Birth</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input placeholder="Is that?" id="registerfirstname" type="text" class="validate">
+            <label for="registerfirstname">First Name</label>
+          </div>
+          <div class="input-field col s6">
+            <input placeholder="Family Name?" id="registerlastname" type="text" class="validate">
+            <label for="registerlastname">Last Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input placeholder="Yours truly" id="registeremail" type="email" class="validate">
+            <label for="registeremail">Email</label>
+          </div>
+          <div class="input-field col s6">
+            <input placeholder="Numbers here" id="registerhandphone" type="text" class="validate">
+            <label for="registerhandphone">HandPhone</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input placeholder="Important" id="registerpassword" type="password" class="validate">
+            <label for="registerpassword">Password</label>
+          </div>
+          <div class="input-field col s6">
+            <input placeholder="Type again" id="repeatpassword" type="password" class="validate">
+            <label for="repeatpassword">Repeat Password</label>
+          </div>
+        </div>
+        <div class="row">
+          <input type="checkbox" id="registeragreement" />
+          <label for="registeragreement">I agree to terms and conditions</label>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Register
+          <i class="material-icons right">send</i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
