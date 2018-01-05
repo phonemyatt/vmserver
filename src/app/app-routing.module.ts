@@ -4,14 +4,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
 import { SimpleloginregistrationComponent } from './simpleloginregistration/simpleloginregistration.component';
 import { SimplereviewComponent } from './simplereview/simplereview.component';
-import { SimplemainComponent } from './simplemain/simplemain.component';
+
+import { DashboardComponent } from './vmcore/dashboard/dashboard.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: '', redirectTo: 'core', pathMatch: 'full' },
     { path: '', component: LandingComponent },
     { path: 'review', component: SimplereviewComponent },
     { path: 'simple', component: SimpleloginregistrationComponent },
-    { path: 'home' , component: SimplemainComponent }
+    { path: 'core' , component: DashboardComponent }
 ];
 
 @NgModule({
@@ -19,4 +20,4 @@ const routes: Routes = [
     exports: [ RouterModule ],
     providers: []
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
