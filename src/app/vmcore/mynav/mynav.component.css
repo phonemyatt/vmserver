@@ -1,6 +1,11 @@
 nav {
     height: 0px;
 }
+
+li {   
+    border-bottom: solid 1px #B6B6B6;
+}
+
 .side-nav {
     width: 200px;
 }

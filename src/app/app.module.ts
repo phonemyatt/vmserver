@@ -4,25 +4,32 @@ import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { MaterializeModule } from 'angular2-materialize';
 
+// Landing Layer
 import { LandingComponent } from './landing/landing.component';
 import { SimpleloginregistrationComponent } from './simpleloginregistration/simpleloginregistration.component';
 import { SimplereviewComponent } from './simplereview/simplereview.component';
 
+// VM Core Layer
+import { CoreModule } from './vmcore/shared/core.module';
+
 import { AppRoutingModule } from './app-routing.module';
-import { SimplemainComponent } from './simplemain/simplemain.component';
+
 
 @NgModule({
   declarations: [
-    LandingComponent, SimpleloginregistrationComponent, SimplereviewComponent, SimplemainComponent
+    LandingComponent,
+    SimpleloginregistrationComponent,
+    SimplereviewComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     MaterializeModule,
+    CoreModule,
     AppRoutingModule
   ],
   providers: [],
-  bootstrap: [LandingComponent]
+  bootstrap: [ LandingComponent ]
 })
 export class AppModule { }

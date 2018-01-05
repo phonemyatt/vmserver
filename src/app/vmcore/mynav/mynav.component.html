@@ -1,0 +1,7 @@
+<nav>
+  <ul id="slide-out" class="side-nav fixed">
+    <li *ngFor="let routeName of routeNames" routerLinkActive="active"><a [routerLink]="[routeName.link]">{{routeName.name}}</a></li>
+  </ul>
+  <a materialize="sideNav" [materializeParams]="[{edge:'left'}]" href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="mdi-navigation-menu"></i></a>
+  <a materialize="sideNav" [materializeParams]="[{edge:'left'}]" href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="mdi-navigation-menu"></i></a>
+</nav>
