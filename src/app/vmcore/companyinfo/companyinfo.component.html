@@ -1,40 +1,11 @@
-<div class="container">
-  <div class="card">
-    <div class="card-header">
-      <img src="https://anewtech.files.wordpress.com/2014/11/anewtech-systems-logo.jpg?w=848" alt="anewtech" />
-    </div>
-    <div class="card-content">
-      <h3>Anewtech Systems</h3>
-      <h4>Leading IPC Supplier and Solutions Provider</h4>
-      <p>
-        We are well established company in South East Asia providing world class services and solutions to manufacturing and medical
-        industry with clear objectives and success stories to follow.
-      </p>
-
-    </div>
-    <div class="card-footer">
-      <ul>
-        <li>
-          <a>
-              <i class="fa fa-pencil-square-o"></i>
-          </a>          
-        </li>
-        <li>
-          <a target="_blank" href="https://www.facebook.com/anewtech.net/">
-            <i class="fa fa-facebook-official"></i>
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="http://www.google.com/search?q=anewtech+systems">
-            <i class="fa fa-google"></i>
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="http://www.anewtech.net">
-            <i class="fa fa-link"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
+<app-companydetail
+    [detailcompany]="parentCompany"
+    (clickEditEvent)="editDetail($event)"
+    *ngIf="!toggle; else editContent">
+</app-companydetail>
+<ng-template #editContent>
+    <app-companyedit
+    [editcompany]="parentCompany"
+    (clickSaveEvent)="saveProfile($event)"
+    (clickCancelEvent)="cancelSaveProfile($event)"></app-companyedit>
+</ng-template>
