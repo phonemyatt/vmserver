@@ -7,7 +7,16 @@ import { VisitorModel } from './../../shared/models/visitormodel';
   styleUrls: ['./visitoritem.component.css']
 })
 export class VisitoritemComponent implements OnInit {
-  @Input() singleVisitor: VisitorModel;
+  @Input() singleVisitor: VisitorModel = {
+    name: '',
+    position: '',
+    company: '',
+    ic: '',
+    img: '',
+    email: '',
+    hp: '',
+    address: '',
+  };;
 
   constructor() { }
 

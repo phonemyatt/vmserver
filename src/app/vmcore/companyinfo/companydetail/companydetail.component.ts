@@ -7,7 +7,12 @@ import { CompanyModel } from './../../shared/models/companymodel';
   styleUrls: ['./companydetail.component.css']
 })
 export class CompanydetailComponent implements OnInit {
-  @Input() detailcompany: CompanyModel;
+  @Input() detailcompany: CompanyModel = {
+    name: '',
+    desc: '',
+    remark: '',
+    img: ''
+  };
   @Output() clickEditEvent = new EventEmitter<CompanyModel>();
 
   constructor() { }

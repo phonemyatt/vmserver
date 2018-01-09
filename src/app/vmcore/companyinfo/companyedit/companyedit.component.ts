@@ -11,7 +11,12 @@ import { CompanyModel } from '../../shared/models/companymodel';
 })
 export class CompanyeditComponent implements OnInit {
   cacheCompany: CompanyModel;
-  @Input() editcompany: CompanyModel;
+  @Input() editcompany: CompanyModel = {
+    name: '',
+    desc: '',
+    remark: '',
+    img: ''
+  };
   @Output() clickSaveEvent = new EventEmitter<CompanyModel>();
   @Output() clickCancelEvent = new EventEmitter<CompanyModel>();
 
@@ -21,8 +26,8 @@ export class CompanyeditComponent implements OnInit {
     this.cacheCompany = this.editcompany; // cache before any changes apply.
   }
 
-  onClickSaveButton() {
-    this.clickSaveEvent.emit(this.editcompany);
+  onClickSaveButton(company: CompanyModel) {
+    this.clickSaveEvent.emit(company);
   }
 
   onClickCancelButton() {

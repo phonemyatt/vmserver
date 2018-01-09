@@ -2,13 +2,22 @@
   <!-- Register screen left -->
   <div class="col s5">
     <app-visitorlist 
-          [allVisitors]="myVisitors"
-          (clickOnSelectVisitor)="selectVisitor($event)"></app-visitorlist>
+    [allVisitors]="myVisitors" 
+    (clickOnSelectVisitor)="selectVisitor($event)"></app-visitorlist>
   </div>
   <!-- Register screen right -->
   <div class="col s7">
-    <app-visitordetail></app-visitordetail>
-    <app-visitoredit></app-visitoredit>
+    <app-visitordetail 
+    [singleVisitor]="myVisitor" 
+    (clickOnEditButton)="editVisitorDetail($event)"
+    *ngIf="!toggle; else editVisitor"></app-visitordetail>
+    <ng-template #editVisitor>
+      <app-visitoredit 
+      [editvisitor]="myVisitor"
+      (clickOnSaveVisitor)="saveVisitorProfile($event)"
+      (clickOnCancelVisitor)="cancelSaveVisitorProfile($event)"></app-visitoredit>
+    </ng-template>
   </div>
-</div>
+ 
 
+</div>

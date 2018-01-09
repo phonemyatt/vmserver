@@ -8,14 +8,30 @@ import { VisitorModel } from './../../shared/models/visitormodel';
 })
 export class VisitoreditComponent implements OnInit {
   cacheVisitor: VisitorModel;
-  @Input() editVisitor: VisitorModel;
+  @Input() editvisitor: VisitorModel = {
+    name: '',
+    position: '',
+    company: '',
+    ic: '',
+    img: '',
+    email: '',
+    hp: '',
+    address: '',
+  };
   @Output() clickOnSaveVisitor = new EventEmitter<VisitorModel>();
   @Output() clickOnCancelVisitor = new EventEmitter<VisitorModel>();
 
-  constructor() { }
-
+  constructor() { 
+  }
   ngOnInit() {
-    this.cacheVisitor = this.editVisitor;
+    this.cacheVisitor = this.editvisitor;
+  }
+
+  onClickSaveButton(visitor: VisitorModel){
+    this.clickOnSaveVisitor.emit(this.editvisitor);
+  }
+  onClickCancelButton(){
+    this.clickOnCancelVisitor.emit(this.cacheVisitor);
   }
 
 }

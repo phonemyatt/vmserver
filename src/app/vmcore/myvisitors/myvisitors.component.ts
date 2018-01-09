@@ -10,7 +10,16 @@ import { VisitorModule } from './shared/visitor.module';
 })
 export class MyvisitorsComponent implements OnInit {
   toggle: Boolean = false;
-  myVisitor: VisitorModule;
+  myVisitor: VisitorModule= {
+    name: '',
+    position: '',
+    company: '',
+    ic: '',
+    img: '',
+    email: '',
+    hp: '',
+    address: '',
+  };
   myVisitors: VisitorModel[];
 
   constructor() { this.initDummyData();  }
@@ -28,20 +37,20 @@ export class MyvisitorsComponent implements OnInit {
     }
   }
 
-  selectVisitor( visitor: VisitorModel ) {
-    console.log(visitor);
+  selectVisitor( visitor: VisitorModel ) {    
+    this.myVisitor = visitor
   }
 
-  editVisitorDetail( myVisitor ) {
-    this.check( myVisitor );
+  editVisitorDetail( visitor: VisitorModel ) {    
+    this.check( visitor );
   }
 
-  saveVisitorProfile( myVisitor ) {
-    console.log( myVisitor );
+  saveVisitorProfile( visitor: VisitorModel ) {
+    this.check( visitor );
   }
 
-  cancelSaveVisitorProfile( myVisitor ) {
-    console.log( myVisitor );
+  cancelSaveVisitorProfile( visitor: VisitorModel ) {
+    this.check( visitor ); 
   }
 
 }
