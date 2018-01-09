@@ -11,7 +11,7 @@ import { MaterializeModule  } from 'angular2-materialize';
 export class SimpleloginregistrationComponent implements OnInit {
   registerbirth: string;
 
-  constructor() { this.registerbirth = new Date().toString(); }
+  constructor() {  }
 
   ngOnInit() {
   }
