@@ -16,9 +16,18 @@ import { MypoliciesComponent } from './../mypolicies/mypolicies.component';
 import { DashboardComponent } from './../dashboard/dashboard.component';
 import { MylogsComponent } from './../mylogs/mylogs.component';
 
+// Sub Core Components
+import { CompanyModule } from './../companyinfo/shared/company.module';
+import { VisitorModule } from './../myvisitors/shared/visitor.module';
+import { LogModule } from './../mylogs/shared/log.module';
+import { HostModule } from './../myhosts/shared/host.module';
+import { SecurityModule } from './../mysecurities/shared/security.module';
+import { DeviceModule } from './../mydevices/shared/device.module';
+
 // Core Router
-import { CoreRoutingModule } from './coure-routing.module';
+import { CoreRoutingModule } from './core-routing.module';
 import { MaterializeDirective } from 'angular2-materialize/dist/materialize-directive';
+import { COMPILER_OPTIONS } from '@angular/core/src/linker/compiler';
 
 @NgModule({
     imports: [
@@ -26,6 +35,12 @@ import { MaterializeDirective } from 'angular2-materialize/dist/materialize-dire
         CoreRoutingModule,
         FormsModule,
         MaterializeModule,
+        VisitorModule,
+        LogModule,
+        HostModule,
+        SecurityModule,
+        DeviceModule,
+        CompanyModule
     ],
     declarations: [
         CompanyinfoComponent,

@@ -1,0 +1,64 @@
+<div>
+  <div class="col s12">
+    <h3>Edit Visitor Profile</h3>
+    <form materialize class="col s12" (ngSubmit)="onClickSaveButton(editvisitor)">
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="visitorpic" type="text" [(ngModel)]="editVisitor.img" name="visitorpic">
+          <label for="visitorpic">Profile Photo</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="visitorname" type="text" [(ngModel)]="editVisitor.name" name="visitorname">
+          <label for="visitorname">Visitor Name</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="visitorcompany" type="text" [(ngModel)]="editVisitor.company" name="visitorcompany">
+          <label for="visitorcompany">Visitor Company</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="visitoridentitfication" type="email" [(ngModel)]="editVisitor.id" name="visitoridentification">
+          <label for="visitoridentification">IC/FIN/Passport</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="visitorposition" type="text" [(ngModel)]="editVisitor.position" name="visitorposition">
+          <label for="visitorposition">Position</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="visitoremail" type="text" [(ngModel)]="editVisitor.email" name="visitoremail">
+          <label for="visitoremail">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="visitorhandphone" type="text" [(ngModel)]="editVisitor.hp" name="visitorhandphone">
+          <label for="visitorhandphone">Handphone</label>
+        </div>
+      </div>
+      <div class="row">
+          <div class="input-field col s12">
+            <input id="visitoraddress" type="text" [(ngModel)]="editVisitor.address" name="visitoraddress">
+            <label for="visitoraddress">Address</label>
+          </div>
+        </div>
+      <button class="btn waves-effect waves-light" type="submit" name="action">Save
+        <i class="material-icons right">save</i>
+      </button>
+      <button class="btn waves-effect waves-light" type="button" (click)="onClickCancelButton()">Cancel
+        <i class="material-icons right">cancel</i>
+      </button>
+    </form>
+  </div>
+</div>

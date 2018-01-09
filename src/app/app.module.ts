@@ -14,11 +14,11 @@ import { SimplereviewComponent } from './simplereview/simplereview.component';
 // VM Core Layer
 import { CoreModule } from './vmcore/shared/core.module';
 
+
 //material components <-- totally different from materialize-css
 import { CoreMaterialModule } from './corematerials/corematerial.module';
 
 import { AppRoutingModule } from './app-routing.module';
-
 
 @NgModule({
   declarations: [

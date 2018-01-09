@@ -1,3 +1,14 @@
-<p>
-  myvisitors works!
-</p>
+<div class="row">
+  <!-- Register screen left -->
+  <div class="col s5">
+    <app-visitorlist 
+          [allVisitors]="myVisitors"
+          (clickOnSelectVisitor)="selectVisitor($event)"></app-visitorlist>
+  </div>
+  <!-- Register screen right -->
+  <div class="col s7">
+    <app-visitordetail></app-visitordetail>
+    <app-visitoredit></app-visitoredit>
+  </div>
+</div>
+

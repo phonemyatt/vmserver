@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="col s6">
+    <h3>Company Profile</h3>
+    <form materialize class="col s12" (ngSubmit)="onClickSaveButton(editcompany)">
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Select your profile picture" id="companypic" type="text" [(ngModel)]="editcompany.img" name="companypic">
+          <label for="companypic">Profile Photo</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Your company name here?" id="companyname" type="text" [(ngModel)]="editcompany.name" name="companyname">
+          <label for="companyname">Company Name</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Describe your company" id="companydescription" type="text" [(ngModel)]="editcompany.desc" name="companydescription">
+          <label for="companydescription">Description</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="companyremark" class="materialize-textarea" [(ngModel)]="editcompany.remark" name="companyremark"></textarea>
+          <label for="companyremark">Remark</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Yours truly" id="companyemail" type="email" [(ngModel)]="editcompany.email" name="companyemail">
+          <label for="companyemail">Email</label>
+        </div>
+        <div class="input-field col s6">
+          <input placeholder="Numbers here" id="companyhandphone" type="text" [(ngModel)]="editcompany.hp" name="companyhandphone">
+          <label for="companyhandphone">HandPhone</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s4">
+          <input placeholder="Link to company" id="companywebsite" type="text" [(ngModel)]="editcompany.website" name="companywebsite">
+          <label for="companywebsite">Website</label>
+        </div>
+        <div class="input-field col s4">
+          <input placeholder="Link to google" id="companygoogle" type="text" [(ngModel)]="editcompany.google" name="companygoogle">
+          <label for="companywebsite">Google</label>
+        </div>
+        <div class="input-field col s4">
+          <input placeholder="Link to facebook" id="companyfacebook" type="text" [(ngModel)]="editcompany.facebook" name="companyfacebook">
+          <label for="companywebsite">Facebook</label>
+        </div>
+      </div>
+
+      <button class="btn waves-effect waves-light" type="submit" name="action">Save
+        <i class="material-icons right">save</i>
+      </button>
+      <button class="btn waves-effect waves-light" type="button" (click)="onClickCancelButton()">Cancel
+        <i class="material-icons right">cancel</i>
+      </button>
+    </form>
+  </div>
+</div>
