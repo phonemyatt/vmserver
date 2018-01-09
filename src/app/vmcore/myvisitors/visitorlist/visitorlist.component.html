@@ -1,21 +1,6 @@
-<ul class="collection">   
-    <li class="collection-item avatar">
-      <app-visitoritem></app-visitoritem>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle green">account_circle</i>
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">done</i></a>    
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle red">account_circle</i>
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">done</i></a>    
-    </li>
-  </ul>
+<ul class="collection">  
+  <li class="collection-item avatar" *ngFor="let visitor of allVisitors" (click)="onSelectVisitor(visitor)">
+    <app-visitoritem [singleVisitor]="visitor"></app-visitoritem>    
+  </li>
+
+</ul>

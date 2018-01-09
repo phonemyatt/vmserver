@@ -1,5 +1,6 @@
-export class Visitor {
+export class HostModel {
     constructor(public name: String,
+        public img: String,
         public position: String,
         public company: String,
         public email: String,

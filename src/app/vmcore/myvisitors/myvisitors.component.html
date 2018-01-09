@@ -1,7 +1,9 @@
 <div class="row">
   <!-- Register screen left -->
   <div class="col s5">
-    <app-visitorlist></app-visitorlist>
+    <app-visitorlist 
+          [allVisitors]="myVisitors"
+          (clickOnSelectVisitor)="selectVisitor($event)"></app-visitorlist>
   </div>
   <!-- Register screen right -->
   <div class="col s7">
@@ -9,3 +11,4 @@
     <app-visitoredit></app-visitoredit>
   </div>
 </div>
+
