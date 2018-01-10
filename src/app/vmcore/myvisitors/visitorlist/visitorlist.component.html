@@ -1,5 +1,8 @@
 <ul class="collection">  
-  <li class="collection-item avatar" *ngFor="let visitor of allVisitors" (click)="onSelectVisitor(visitor)">
+  <li class="collection-item avatar" *ngFor="let visitor of allVisitors; let i = index" 
+    (click)="setClickedRow(i)" 
+    (click)="onSelectVisitor(visitor)"
+    [class.active]="i == selectedRow">
     <app-visitoritem [singleVisitor]="visitor"></app-visitoritem>    
   </li>
 

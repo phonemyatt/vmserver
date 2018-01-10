@@ -7,7 +7,8 @@ import { VisitorModel } from './../../shared/models/visitormodel';
   styleUrls: ['./visitorlist.component.css']
 })
 export class VisitorlistComponent implements OnInit {
-  selectedVisitor: VisitorModel;
+  //selectedVisitor: VisitorModel;
+  selectedRow : Number;
   @Input() allVisitors: VisitorModel[];
   @Output() clickOnSelectVisitor = new EventEmitter<VisitorModel>();
 
@@ -17,8 +18,12 @@ export class VisitorlistComponent implements OnInit {
   }
 
   onSelectVisitor(visitor: VisitorModel) {
-    this.selectedVisitor = visitor;   
-    this.clickOnSelectVisitor.emit(this.selectedVisitor);
+    //this.selectedVisitor = visitor;   
+    this.clickOnSelectVisitor.emit(visitor);
+  }
+
+  setClickedRow(index) {
+    this.selectedRow = index;
   }
 
 }
