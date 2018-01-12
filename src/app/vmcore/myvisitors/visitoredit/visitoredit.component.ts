@@ -21,7 +21,7 @@ export class VisitoreditComponent implements OnInit {
   @Output() clickOnSaveVisitor = new EventEmitter<VisitorModel>();
   @Output() clickOnCancelVisitor = new EventEmitter<VisitorModel>();
 
-  constructor() { 
+  constructor() {
   }
   ngOnInit() {
     this.cacheVisitor = this.editvisitor;

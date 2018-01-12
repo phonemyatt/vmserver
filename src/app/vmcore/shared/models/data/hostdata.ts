@@ -1,6 +1,6 @@
-import { VisitorModel } from './../visitormodel';
+import { HostModel } from './../hostmodel';
 
-export const visitordata: VisitorModel[] = [
+export const hostdata: HostModel[] = [
     {
         name: 'Phone Myat Thu',
         img: 'https://d30y9cdsu7xlg0.cloudfront.net/png/363633-200.png',
