@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { SecurityModel } from '../../shared/models/securitymodel';
 
 @Component({
   selector: 'app-securityitem',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./securityitem.component.css']
 })
 export class SecurityitemComponent implements OnInit {
+  @Input() singleSecurity: SecurityModel = {
+    name: '',
+    position: '',
+    company: '',
+    id: '',
+    img: '',
+    email: '',
+    hp: '',
+    address: '',
+  };
 
   constructor() { }
 
   ngOnInit() {
   }
-
 }

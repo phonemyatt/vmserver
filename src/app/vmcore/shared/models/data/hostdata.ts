@@ -1,54 +1,54 @@
-import { VisitorModel } from './../visitormodel';
+import { HostModel } from './../hostmodel';
 
-export const visitordata: VisitorModel[] = [
+export const hostdata: HostModel[] = [
     {
         name: 'Phone Myat Thu',
         img: 'https://d30y9cdsu7xlg0.cloudfront.net/png/363633-200.png',
         position: 'Engineer',
-        company: 'Microsoft',
+        company: 'Anewtech Systems',
         id: 'G0706962L',
-        email: 'phonemyatt@microsoft.com.sg',
+        email: 'phonemyatt@anewtech.com.sg',
         hp: '+65-92338553',
-        address: 'Bedok'
+        address: 'Oxley Bizhub 2'
     },
     {
         name: 'James Nguyen',
         img: 'https://d30y9cdsu7xlg0.cloudfront.net/png/363633-200.png',
         position: 'Engineer',
-        company: 'Solidworks',
+        company: 'Anewtech Systems',
         id: 'G0123456L',
-        email: 'james@solidworks.com.sg',
+        email: 'james@anewtech.com.sg',
         hp: '+65-92338553',
-        address: 'Ang Moe Kio'
+        address: 'Oxley Bizhub 2'
     },
     {
         name: 'Meehua',
         img: 'https://d30y9cdsu7xlg0.cloudfront.net/png/363633-200.png',
         position: 'Engineer',
-        company: 'Google',
+        company: 'Anewtech Systems',
         id: 'G7890123L',
-        email: 'meehua@google.com.sg',
+        email: 'meehua@anewtech.com.sg',
         hp: '+65-92338553',
-        address: 'Orchard'
+        address: 'Oxley Bizhub 2'
     },
     {
         name: 'Andrew',
         img: 'https://d30y9cdsu7xlg0.cloudfront.net/png/363633-200.png',
         position: 'Sales Engineer',
-        company: 'Yahoo',
+        company: 'Anewtech Systems',
         id: 'G8901234L',
-        email: 'andrew@yahoo.com.sg',
+        email: 'andrew@anewtech.com.sg',
         hp: '+65-92338553',
-        address: 'Yio Chu Kang'
+        address: 'Oxley Bizhub 2'
     },
     {
         name: 'Samuel',
         img: 'https://d30y9cdsu7xlg0.cloudfront.net/png/363633-200.png',
         position: 'Sales Engineer',
-        company: 'Baidu',
+        company: 'Anewtech Systems',
         id: 'G5678901L',
-        email: 'samuel@baidu.com.sg',
+        email: 'samuel@anewtech.com.sg',
         hp: '+65-92338553',
-        address: 'Nicole Highway'
+        address: 'Oxley Bizhub 2'
     }
 ];

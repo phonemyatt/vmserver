@@ -6,13 +6,14 @@ import { VisitorModel } from './../../shared/models/visitormodel';
   templateUrl: './visitoredit.component.html',
   styleUrls: ['./visitoredit.component.css']
 })
+
 export class VisitoreditComponent implements OnInit {
   cacheVisitor: VisitorModel;
-  @Input() editvisitor: VisitorModel = {
+  @Input() editVisitor: VisitorModel = {
     name: '',
     position: '',
     company: '',
-    ic: '',
+    id: '',
     img: '',
     email: '',
     hp: '',
@@ -21,17 +22,15 @@ export class VisitoreditComponent implements OnInit {
   @Output() clickOnSaveVisitor = new EventEmitter<VisitorModel>();
   @Output() clickOnCancelVisitor = new EventEmitter<VisitorModel>();
 
-  constructor() { 
+  constructor() {
   }
   ngOnInit() {
-    this.cacheVisitor = this.editvisitor;
+    this.cacheVisitor = Object.assign( {}, this.editVisitor );
   }
-
-  onClickSaveButton(visitor: VisitorModel){
-    this.clickOnSaveVisitor.emit(this.editvisitor);
+  onClickSaveButton(visitor: VisitorModel) {
+      this.clickOnSaveVisitor.emit(visitor);
   }
-  onClickCancelButton(){
-    this.clickOnCancelVisitor.emit(this.cacheVisitor);
+  onClickCancelButton(visitor: VisitorModel) {
+    this.clickOnCancelVisitor.emit(visitor);
   }
-
 }

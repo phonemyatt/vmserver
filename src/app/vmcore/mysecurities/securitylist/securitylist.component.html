@@ -1,3 +1,9 @@
-<p>
-  securitylist works!
-</p>
+<ul class="collection">  
+  <li class="collection-item avatar" *ngFor="let security of allSecurities; let i = index" 
+    (click)="setClickedRow(i)" 
+    (click)="onSelectSecurity(security)"
+    [class.active]="i == selectedRow">
+    <app-securityitem [singleSecurity]="security"></app-securityitem>    
+  </li>
+
+</ul>

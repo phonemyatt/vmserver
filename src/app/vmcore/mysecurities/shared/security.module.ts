@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MaterializeModule } from 'angular2-materialize';
 
 // Visitor Components - List < item < detail < edit
 import { SecuritylistComponent } from './../securitylist/securitylist.component';
@@ -14,6 +15,7 @@ import { SecurityeditComponent } from './../securityedit/securityedit.component'
     imports: [
         CommonModule,
         FormsModule,
+        MaterializeModule
     ],
     declarations: [
         SecuritylistComponent,

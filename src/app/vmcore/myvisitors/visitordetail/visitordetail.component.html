@@ -4,16 +4,19 @@
     <a class="btn-floating pulse btn-large waves-effect waves-light red" (click)="onClickEditButton()">
       <i class="material-icons">edit</i>
     </a>
+    <a class="btn-floating pulse btn-large waves-effect waves-light red" (click)="onClickAddButton()">
+      <i class="material-icons">add</i>
+    </a>
   </h3>
   </li>
   <li class="collection-item">
-      <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/363633-200.png" alt="" class="circle responsive-img">
+      <img src="{{detailVisitor.img}}" alt="" class="circle responsive-img">
   </li>
-  <li class="collection-item">Name:{{singleVisitor.name}}</li>
-  <li class="collection-item">Company:{{singleVisitor.company}}</li>
-  <li class="collection-item">IC/FIN/Passport:{{singleVisitor.ic}}</li>
-  <li class="collection-item">Position:{{singleVisitor.position}}</li>
-  <li class="collection-item">Email:{{singleVisitor.email}}</li>
-  <li class="collection-item">Handphone:{{singleVisitor.hp}}</li>  
-  <li class="collection-item">Address:{{singleVisitor.address}}</li>  
+  <li class="collection-item">Name:{{detailVisitor.name}}</li>
+  <li class="collection-item">Company:{{detailVisitor.company}}</li>
+  <li class="collection-item">IC/FIN/Passport:{{detailVisitor.id}}</li>
+  <li class="collection-item">Position:{{detailVisitor.position}}</li>
+  <li class="collection-item">Email:{{detailVisitor.email}}</li>
+  <li class="collection-item">Handphone:{{detailVisitor.hp}}</li>  
+  <li class="collection-item">Address:{{detailVisitor.address}}</li>  
 </ul>

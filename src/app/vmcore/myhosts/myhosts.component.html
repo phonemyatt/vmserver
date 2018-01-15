@@ -1,4 +1,23 @@
-<app-hostdetail></app-hostdetail>
-<app-hostedit></app-hostedit>
-<app-hostitem></app-hostitem>
-<app-hostlist></app-hostlist>
+<div class="row">
+    <!-- Register screen left -->
+    <div class="col s5">
+      <app-hostlist 
+      [allHosts]="myHosts"      
+      (clickOnSelectHost)="selectHost($event)"
+      (clickOnSelectHostRow)="selectHostRow($event)"></app-hostlist>
+    </div>
+    <!-- Register screen right -->
+    <div class="col s7">
+      <app-hostdetail 
+      [detailHost]="myHost" 
+      (clickOnEditButton)="editHostDetail($event)"
+      (clickOnAddButton)="addNewHost()"
+      *ngIf="!toggle; else editHost"></app-hostdetail>
+      <ng-template #editHost>
+        <app-hostedit 
+        [editHost]="myHost"
+        (clickOnSaveHost)="saveHostProfile($event)"
+        (clickOnCancelHost)="cancelSaveHostProfile($event)"></app-hostedit>
+      </ng-template>
+    </div>
+</div>

@@ -11,12 +11,12 @@ export class VisitoritemComponent implements OnInit {
     name: '',
     position: '',
     company: '',
-    ic: '',
+    id: '',
     img: '',
     email: '',
     hp: '',
     address: '',
-  };;
+  };
 
   constructor() { }
 

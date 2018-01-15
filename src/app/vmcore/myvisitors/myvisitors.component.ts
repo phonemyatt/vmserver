@@ -10,15 +10,16 @@ import { VisitorModule } from './shared/visitor.module';
 })
 export class MyvisitorsComponent implements OnInit {
   toggle: Boolean = false;
+  myRow = -1;
   myVisitor: VisitorModule= {
     name: '',
     position: '',
     company: '',
-    ic: '',
+    id: '',
     img: '',
     email: '',
     hp: '',
-    address: '',
+    address: ''
   };
   myVisitors: VisitorModel[];
 
@@ -36,21 +37,25 @@ export class MyvisitorsComponent implements OnInit {
       this.toggle = !this.toggle;
     }
   }
-
-  selectVisitor( visitor: VisitorModel ) {    
-    this.myVisitor = visitor
+  selectVisitor( visitor: VisitorModel ) {
+    this.myVisitor = visitor;
   }
-
-  editVisitorDetail( visitor: VisitorModel ) {    
+  selectVisitorRow( row: number ) {
+    this.myRow = row;
+  }
+  addNewVisitor() {
+    this.myVisitors.push( new VisitorModel( '', 'https://d30y9cdsu7xlg0.cloudfront.net/png/363633-200.png', '', '', '', '', '', '') );
+    this.check( true );
+  }
+  editVisitorDetail( visitor: VisitorModel ) {
     this.check( visitor );
   }
-
   saveVisitorProfile( visitor: VisitorModel ) {
     this.check( visitor );
   }
-
   cancelSaveVisitorProfile( visitor: VisitorModel ) {
-    this.check( visitor ); 
+    this.check( visitor );
+    this.myVisitor = visitor;
+    this.myVisitors[this.myRow] = visitor;
   }
-
 }
