@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { SecurityModel } from '../../shared/models/securitymodel';
 
 @Component({
   selector: 'app-securityedit',
@@ -6,10 +7,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./securityedit.component.css']
 })
 export class SecurityeditComponent implements OnInit {
+  cacheSecurity: SecurityModel;
+  @Input() editSecurity: SecurityModel = {
+    name: '',
+    position: '',
+    company: '',
+    id: '',
+    img: '',
+    email: '',
+    hp: '',
+    address: '',
+  };
+  @Output() clickOnSaveSecurity = new EventEmitter<SecurityModel>();
+  @Output() clickOnCancelSecurity = new EventEmitter<SecurityModel>();
 
-  constructor() { }
-
+  constructor() {
+  }
   ngOnInit() {
+    this.cacheSecurity = this.editSecurity;
   }
 
+  onClickSaveButton( host: SecurityModel) {
+      this.clickOnSaveSecurity.emit(this.editSecurity);
+  }
+  onClickCancelButton() {
+    this.clickOnCancelSecurity.emit(this.cacheSecurity);
+  }
 }

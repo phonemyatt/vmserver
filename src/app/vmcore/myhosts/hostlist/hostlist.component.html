@@ -1,3 +1,9 @@
-<p>
-  hostlist works!
-</p>
+<ul class="collection">  
+  <li class="collection-item avatar" *ngFor="let host of allHosts; let i = index" 
+    (click)="setClickedRow(i)" 
+    (click)="onSelectHost(host)"
+    [class.active]="i == selectedRow">
+    <app-hostitem [singleHost]="host"></app-hostitem>    
+  </li>
+
+</ul>

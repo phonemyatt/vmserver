@@ -1,3 +1,22 @@
-<p>
-  securitydetail works!
-</p>
+<ul class="collection">
+  <li class="collection-item">
+    <h3>Security Details 
+    <a class="btn-floating pulse btn-large waves-effect waves-light red" (click)="onClickEditButton()">
+      <i class="material-icons">edit</i>
+    </a>
+    <a class="btn-floating pulse btn-large waves-effect waves-light red" (click)="onClickAddButton()">
+      <i class="material-icons">add</i>
+    </a>
+  </h3>
+  </li>
+  <li class="collection-item">
+      <img src="{{detailSecurity.img}}" alt="" class="circle responsive-img">
+  </li>
+  <li class="collection-item">Name:{{detailSecurity.name}}</li>
+  <li class="collection-item">Company:{{detailSecurity.company}}</li>
+  <li class="collection-item">IC/FIN/Passport:{{detailSecurity.id}}</li>
+  <li class="collection-item">Position:{{detailSecurity.position}}</li>
+  <li class="collection-item">Email:{{detailSecurity.email}}</li>
+  <li class="collection-item">Handphone:{{detailSecurity.hp}}</li>  
+  <li class="collection-item">Address:{{detailSecurity.address}}</li>  
+</ul>

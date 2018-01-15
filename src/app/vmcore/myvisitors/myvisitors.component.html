@@ -3,17 +3,19 @@
   <div class="col s5">
     <app-visitorlist 
     [allVisitors]="myVisitors" 
-    (clickOnSelectVisitor)="selectVisitor($event)"></app-visitorlist>
+    (clickOnSelectVisitor)="selectVisitor($event)"
+    (clickOnSelectVisitorRow)="selectVisitorRow($event)"></app-visitorlist>
   </div>
   <!-- Register screen right -->
   <div class="col s7">
     <app-visitordetail 
-    [singleVisitor]="myVisitor" 
+    [detailVisitor]="myVisitor"
     (clickOnEditButton)="editVisitorDetail($event)"
+    (clickOnAddButton)="addNewVisitor()"
     *ngIf="!toggle; else editVisitor"></app-visitordetail>
     <ng-template #editVisitor>
       <app-visitoredit 
-      [editvisitor]="myVisitor"
+      [editVisitor]="myVisitor"
       (clickOnSaveVisitor)="saveVisitorProfile($event)"
       (clickOnCancelVisitor)="cancelSaveVisitorProfile($event)"></app-visitoredit>
     </ng-template>

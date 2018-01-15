@@ -1,3 +1,64 @@
-<p>
-  securityedit works!
-</p>
+<div>
+  <div class="col s12">
+    <h3>Edit Security Profile</h3>
+    <form materialize class="col s12" (ngSubmit)="onClickSaveButton(editSecurity)">
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="securitypic" type="text" [(ngModel)]="editSecurity.img" name="securitypic">
+          <label for="securitypic">Profile Photo</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="securityname" type="text" [(ngModel)]="editSecurity.name" name="securityname">
+          <label for="securityname">Security Name</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="securitycompany" type="text" [(ngModel)]="editSecurity.company" name="securitycompany">
+          <label for="securitycompany">Security Company</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="securityidentitfication" type="email" [(ngModel)]="editSecurity.id" name="securityidentification">
+          <label for="securityidentification">IC/FIN/Passport</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="securityposition" type="text" [(ngModel)]="editSecurity.position" name="securityposition">
+          <label for="securityposition">Position</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="securityemail" type="text" [(ngModel)]="editSecurity.email" name="securityemail">
+          <label for="securityemail">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="securityhandphone" type="text" [(ngModel)]="editSecurity.hp" name="securityhandphone">
+          <label for="securityhandphone">Handphone</label>
+        </div>
+      </div>
+      <div class="row">
+          <div class="input-field col s12">
+            <input id="securityaddress" type="text" [(ngModel)]="editSecurity.address" name="securityaddress">
+            <label for="securityaddress">Address</label>
+          </div>
+        </div>
+      <button class="btn waves-effect waves-light" type="submit" name="action">Save
+        <i class="material-icons right">save</i>
+      </button>
+      <button class="btn waves-effect waves-light" type="button" (click)="onClickCancelButton()">Cancel
+        <i class="material-icons right">cancel</i>
+      </button>
+    </form>
+  </div>
+</div>

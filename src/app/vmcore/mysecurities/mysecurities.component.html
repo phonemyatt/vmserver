@@ -1,4 +1,25 @@
-<app-securitydetail></app-securitydetail>
-<app-securityedit></app-securityedit>
-<app-securityitem></app-securityitem>
-<app-securitylist></app-securitylist>
+<div class="row">
+    <!-- Register screen left -->
+    <div class="col s5">
+      <app-securitylist 
+      [allSecurities]="mySecurities" 
+      (clickOnSelectSecurity)="selectSecurity($event)"
+      (clickOnSelectSecurityRow)="selectSecurityRow($event)"></app-securitylist>
+    </div>
+    <!-- Register screen right -->
+    <div class="col s7">
+      <app-securitydetail 
+      [detailSecurity]="mySecurity" 
+      (clickOnEditButton)="editSecurityDetail($event)"
+      (clickonAddButton)="addNewSecurity()"
+      *ngIf="!toggle; else editSecurity"></app-securitydetail>
+      <ng-template #editSecurity>
+        <app-securityedit 
+        [editSecurity]="mySecurity"
+        (clickOnSaveSecurity)="saveSecurityProfile($event)"
+        (clickOnCancelSecurity)="cancelSaveSecurityProfile($event)"></app-securityedit>
+      </ng-template>
+    </div>
+   
+  
+  </div>

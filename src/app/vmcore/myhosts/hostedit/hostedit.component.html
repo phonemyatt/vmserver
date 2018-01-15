@@ -1,3 +1,49 @@
-<p>
-  hostedit works!
-</p>
+<div>
+    <div class="col s12">
+      <h3>Edit Host Profile</h3>
+      <form materialize class="col s12" (ngSubmit)="onClickSaveButton(editHost)">
+  
+        <div class="row input-field col s12">
+          <input placeholder="Select your profile picture" id="hostpic" type="text" [(ngModel)]="editHost.img" name="hostpic">
+          <label for="hostpic">Profile Photo</label>
+        </div>
+  
+        <div class="row input-field col s12">
+          <input placeholder="Type your name" id="hostname" type="text" [(ngModel)]="editHost.name" name="hostname">
+          <label for="hostname">Host Name</label>
+        </div>
+  
+        <div class="row input-field col s12">
+          <input placeholder="Type your company" id="hostcompany" type="text" [(ngModel)]="editHost.company" name="hostcompany">
+          <label for="hostcompany">Host Company</label>
+        </div>
+        <div class="row input-field col s12">
+          <input placeholder="Type your id" id="hostidentitfication" type="text" [(ngModel)]="editHost.id" name="hostidentification">
+          <label for="hostidentification">IC/FIN/Passport</label>
+        </div>
+        <div class="row input-field col s12">
+          <input placeholder="Type your position" id="hostposition" type="text" [(ngModel)]="editHost.position" name="hostposition">
+          <label for="hostposition">Position</label>
+        </div>
+        <div class="row input-field col s12">
+          <input placeholder="Type your email" id="hostemail" type="email" [(ngModel)]="editHost.email" name="hostemail">
+          <label for="hostemail">Email</label>
+        </div>
+        <div class="row input-field col s12">
+          <input placeholder="Type your hp" id="hosthandphone" type="text" [(ngModel)]="editHost.hp" name="hosthandphone">
+          <label for="hosthandphone">Handphone</label>
+        </div>
+        <div class="row input-field col s12">
+          <input placeholder="Type your address" id="hostaddress" type="text" [(ngModel)]="editHost.address" name="hostaddress">
+          <label for="hostaddress">Address</label>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Save
+          <i class="material-icons right">save</i>
+        </button>
+        <button class="btn waves-effect waves-light" type="button" (click)="onClickCancelButton()">Cancel
+          <i class="material-icons right">cancel</i>
+        </button>
+      </form>
+    </div>
+  </div>
+  

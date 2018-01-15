@@ -1,10 +1,10 @@
-import { HostModel } from './../hostmodel';
+import { SecurityModel } from './../securitymodel';
 
-export const hostdata: HostModel[] = [
+export const securitydata: SecurityModel[] = [
     {
         name: 'Phone Myat Thu',
         img: 'https://d30y9cdsu7xlg0.cloudfront.net/png/363633-200.png',
-        position: 'Engineer',
+        position: 'Security Officer 1',
         company: 'Anewtech Systems',
         id: 'G0706962L',
         email: 'phonemyatt@anewtech.com.sg',
@@ -14,7 +14,7 @@ export const hostdata: HostModel[] = [
     {
         name: 'James Nguyen',
         img: 'https://d30y9cdsu7xlg0.cloudfront.net/png/363633-200.png',
-        position: 'Engineer',
+        position: 'Security Officer 2',
         company: 'Anewtech Systems',
         id: 'G0123456L',
         email: 'james@anewtech.com.sg',
@@ -24,7 +24,7 @@ export const hostdata: HostModel[] = [
     {
         name: 'Meehua',
         img: 'https://d30y9cdsu7xlg0.cloudfront.net/png/363633-200.png',
-        position: 'Engineer',
+        position: 'Security Manager',
         company: 'Anewtech Systems',
         id: 'G7890123L',
         email: 'meehua@anewtech.com.sg',
@@ -34,7 +34,7 @@ export const hostdata: HostModel[] = [
     {
         name: 'Andrew',
         img: 'https://d30y9cdsu7xlg0.cloudfront.net/png/363633-200.png',
-        position: 'Sales Engineer',
+        position: 'Security Officer 1',
         company: 'Anewtech Systems',
         id: 'G8901234L',
         email: 'andrew@anewtech.com.sg',
@@ -44,7 +44,7 @@ export const hostdata: HostModel[] = [
     {
         name: 'Samuel',
         img: 'https://d30y9cdsu7xlg0.cloudfront.net/png/363633-200.png',
-        position: 'Sales Engineer',
+        position: 'Security Officer 1',
         company: 'Anewtech Systems',
         id: 'G5678901L',
         email: 'samuel@anewtech.com.sg',
