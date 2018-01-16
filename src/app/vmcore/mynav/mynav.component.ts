@@ -15,7 +15,8 @@ export class MynavComponent implements OnInit {
                  { name: 'Agreement' , link: 'policies'},
                  { name: 'Security' , link: 'securities'},
                  { name: 'Emergency' , link: 'emergency'},
-                 { name: 'Device' , link: 'devices'}  ];
+                 { name: 'Device' , link: 'devices'},
+              ];
   constructor() { }
 
   ngOnInit() {

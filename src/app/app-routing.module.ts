@@ -6,13 +6,16 @@ import { SimpleloginregistrationComponent } from './simpleloginregistration/simp
 import { SimplereviewComponent } from './simplereview/simplereview.component';
 
 import { DashboardComponent } from './vmcore/dashboard/dashboard.component';
+import { DashComponent } from './manage/dash/dash.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'core', pathMatch: 'full' },
+    { path: '', redirectTo: 'manage', pathMatch: 'full' },
     { path: '', component: LandingComponent },
     { path: 'review', component: SimplereviewComponent },
     { path: 'simple', component: SimpleloginregistrationComponent },
-    { path: 'core' , component: DashboardComponent }
+    { path: 'core' , component: DashboardComponent },
+    { path: 'manage' , component: DashComponent },
+
 ];
 
 @NgModule({

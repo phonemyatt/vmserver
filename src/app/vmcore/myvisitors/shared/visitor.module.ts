@@ -9,6 +9,8 @@ import { VisitorlistComponent } from './../visitorlist/visitorlist.component';
 import { VisitoritemComponent } from './../visitoritem/visitoritem.component';
 import { VisitordetailComponent } from './../visitordetail/visitordetail.component';
 import { VisitoreditComponent } from './../visitoredit/visitoredit.component';
+// Visitor Services
+import { VisitorService } from './visitor.service';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { VisitoreditComponent } from './../visitoredit/visitoredit.component';
         VisitordetailComponent,
         VisitoreditComponent,
     ],
-    providers: []
+    providers: [
+        VisitorService
+    ]
 })
 
-export class VisitorModule {}
+export class VisitorModule { }

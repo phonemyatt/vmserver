@@ -19,8 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [        
-        "styles.css",
-        "./../node_modules/materialize-css/dist/css/materialize.min.css",
+        "./../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",       
+        "styles.css",       
         "./../node_modules/font-awesome/css/font-awesome.min.css"
       ],
       "scripts": [

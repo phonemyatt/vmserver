@@ -22,7 +22,7 @@ const childCoreRoutes: Routes = [{
         { path: 'policies', component: MypoliciesComponent },
         { path: 'securities', component: MysecuritiesComponent },
         { path: 'emergency', component: EmergencyresponseComponent },
-        { path: 'devices', component: MydevicesComponent }
+        { path: 'devices', component: MydevicesComponent },
     ]
 }];
 
