@@ -24,10 +24,12 @@ import { HostModule } from './../myhosts/shared/host.module';
 import { SecurityModule } from './../mysecurities/shared/security.module';
 import { DeviceModule } from './../mydevices/shared/device.module';
 
+// Sub Core Material Module
+
 // Core Router
 import { CoreRoutingModule } from './core-routing.module';
 import { MaterializeDirective } from 'angular2-materialize/dist/materialize-directive';
-import { COMPILER_OPTIONS } from '@angular/core/src/linker/compiler';
+// import { COMPILER_OPTIONS } from '@angular/core/src/linker/compiler';
 
 @NgModule({
     imports: [
@@ -40,7 +42,7 @@ import { COMPILER_OPTIONS } from '@angular/core/src/linker/compiler';
         HostModule,
         SecurityModule,
         DeviceModule,
-        CompanyModule
+        CompanyModule,
     ],
     declarations: [
         CompanyinfoComponent,
@@ -52,8 +54,8 @@ import { COMPILER_OPTIONS } from '@angular/core/src/linker/compiler';
         MypoliciesComponent,
         DashboardComponent,
         MynavComponent,
-        MylogsComponent
+        MylogsComponent,
     ],
     providers: []
 })
-export class CoreModule {}
+export class CoreModule { }

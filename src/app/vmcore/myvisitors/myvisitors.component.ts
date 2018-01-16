@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { VisitorModel } from './../shared/models/visitormodel';
 import { visitordata } from './../shared/models/data/visitordata';
 import { VisitorModule } from './shared/visitor.module';
+import { VisitorService } from './shared/visitor.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-myvisitors',
@@ -22,10 +24,16 @@ export class MyvisitorsComponent implements OnInit {
     address: ''
   };
   myVisitors: VisitorModel[];
+  widgets$: Observable<any>;
 
-  constructor() { this.initDummyData();  }
+  constructor(public db: VisitorService) { this.initDummyData();  }
 
   ngOnInit() {
+    this.widgets$ = this.db.colRef.valueChanges();
+  }
+
+  deleteWidgets() {
+    this.db.deleteCollection('widgets', 5). subscribe();
   }
 
   initDummyData() {

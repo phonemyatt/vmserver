@@ -20,6 +20,30 @@
       (clickOnCancelVisitor)="cancelSaveVisitorProfile($event)"></app-visitoredit>
     </ng-template>
   </div>
- 
+</div>
 
+<div class="content">
+  <button (click)="db.generateData(50)" class="button is-success">Generate 50 Documents</button>  
+  <button (click)="deleteWidgets()" class="button is-danger">Delete All</button>
+<table class="table is-striped">
+  <thead>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Name</th>
+      <th>Brand</th>
+      <th>Color</th>
+      <th>Price</th>
+    <tr>
+
+    <tr *ngFor="let widget of widgets$ | async">
+        <td>{{ widget.name }}</td>
+        <td>{{ widget.brand }}</td>
+        <td>{{ widget.color }}</td>
+        <td>{{ widget.price }}</td>
+      </tr>
+            
+  </tbody>
+</table>
 </div>

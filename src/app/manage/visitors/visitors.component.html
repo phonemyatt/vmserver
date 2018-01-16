@@ -1,0 +1,72 @@
+<!--<div class="content">
+  <div class="container">
+    <button mat-button (click)="generateData()">Generate 50 Visitors</button>
+    <button mat-button (click)="deleteAllVisitors()">Delete Visitors</button>
+  </div>
+
+  <table class="table is-striped">
+    <thead>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Company</th>
+        <th>Handphone</th>
+        <th>Email</th>
+        <th>Actions</th>
+        <tr>
+          <tr *ngFor="let visitor of visitors$ | async">
+            <td>{{ visitor.name }}</td>
+            <td>{{ visitor.company }}</td>
+            <td>{{ visitor.hp }}</td>
+            <td>{{ visitor.email }}</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+</div>
+-->
+
+<!--Main Table-->
+<button mat-raised-button color="warn" (click)="addOne()">Add a visitor to Firestore</button>
+<button mat-raised-button color="warn" (click)="generateData()">Generate 50 Visitors</button>
+<button mat-raised-button color="warn" (click)="deleteAllVisitors()">Delete Visitors</button>
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+  <mat-table #table [dataSource]="dataSource" matSort [trackBy]="trackVisitorByUid" class="animate">
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let visitor"> {{ visitor.name }} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="company">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Company </mat-header-cell>
+      <mat-cell *matCellDef="let visitor"> {{ visitor.company }} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="ic">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Identification </mat-header-cell>
+      <mat-cell *matCellDef="let visitor"> {{ visitor.ic }} </mat-cell>
+    </ng-container>  
+
+    <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let visitor"> 
+          <button mat-raised-button  color="primary" (click)="openDialog(visitor)">Edit</button> 
+          <button mat-raised-button  color="accent" (click)="deleteDialog(visitor)">Delete</button> 
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
+  </mat-table>
+</div>
+
