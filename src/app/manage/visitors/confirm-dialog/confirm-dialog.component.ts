@@ -4,12 +4,11 @@ import { VisitorServices } from './../shared/visitors.service';
 import { VisitorModel } from './../shared/visitormodel';
 
 @Component({
-  selector: 'app-edit-dialog',
-  templateUrl: './edit-dialog.component.html',
-  styleUrls: ['./edit-dialog.component.css']
+  selector: 'app-confirm-dialog',
+  templateUrl: './confirm-dialog.component.html',
+  styleUrls: ['./confirm-dialog.component.css']
 })
-export class EditDialogComponent {
-  title: string;
+export class ConfirmDialogComponent {
   visitor: VisitorModel = {
     id: '',
     imgpath: '',
@@ -21,16 +20,11 @@ export class EditDialogComponent {
     hp: '',
     address: '',
   };
-
   constructor(
-    private vs: VisitorServices,
-    public dialogRef: MatDialogRef<EditDialogComponent>,
+    private afs: VisitorServices,
+    public dialogRef: MatDialogRef<ConfirmDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      if ( data === 'new' ) {
-        this.title = 'New Visitor Profile';
-      } else {
-        this.title = 'Edit Visitor Profile';
-        this.visitor.id = data.id;
+      this.visitor.id = data.id;
         this.visitor.imgpath = data.imgpath;
         this.visitor.name = data.name;
         this.visitor.position = data.position;
@@ -39,15 +33,16 @@ export class EditDialogComponent {
         this.visitor.email = data.email;
         this.visitor.hp = data.hp;
         this.visitor.address = data.address;
-      }
     }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close('No');
   }
 
-  updateVisitor(): void {
-    (this.data === 'new') ? this.vs.addOneVisitor(this.visitor) : this.vs.updateVisitor(this.visitor);
-    this.dialogRef.close();
+  onConfirm(): void {
+    this.afs.deleteVisitor(this.visitor);
+    this.dialogRef.close('Yes');
   }
+
+
 }

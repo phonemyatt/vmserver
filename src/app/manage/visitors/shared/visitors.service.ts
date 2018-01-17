@@ -12,6 +12,10 @@ export class VisitorServices {
     colRef = this.afs.collection(this.visitorlink, ref => ref.orderBy('__name__'));
     constructor(private afs: AngularFirestore) {}
 
+    deleteVisitor(visitor: VisitorModel) {
+        this.afs.collection(this.visitorlink).doc(visitor.id).delete();
+    }
+
     updateVisitor(visitor: VisitorModel) {
         this.afs.collection(this.visitorlink).doc(visitor.id).update({
             imgpath: visitor.imgpath,
@@ -33,10 +37,23 @@ export class VisitorServices {
     trackVisitorByUid(index, item) {
         return item.uid;
     }
-    // Add one
-    addOneVisitor() {
+
+    // Add one visitor
+    addOneVisitor(visitor: VisitorModel ) {
+        if ( visitor ) {
+            this.colRef.add(visitor).then(x => {
+                this.afs.collection(this.visitorlink).doc(x.id).update({
+                    id: x.id
+                });
+            });
+        }
+    }
+
+    // Add one Random Visitor
+    addOneRandomVisitor() {
         const visitor: VisitorModel = {
-            imgpath: faker.image.imageUrl(),
+                id: '',
+                imgpath: faker.image.avatar(),
                 name: faker.name.findName(),
                 position: faker.name.jobTitle(),
                 company: faker.company.companyName(),
@@ -45,14 +62,24 @@ export class VisitorServices {
                 hp: faker.phone.phoneNumber(),
                 address: faker.address.streetAddress()
         };
-        this.afs.collection(this.visitorlink).add(visitor);
+        this.colRef.add(visitor).then(x => {
+            this.afs.collection(this.visitorlink).doc(x.id).update({
+                id: x.id
+            });
+        });
+        // this.afs.collection(this.visitorlink).add(visitor).then(x => {
+        //     this.afs.collection(this.visitorlink).doc(x.id).update({
+        //         id: x.id
+        //     });
+        // });
     }
 
     // Helper to quickly generate dummy visitor data
     generateVisitors(size: number) {
         for (const i of Array(size)) {
             const dummyData: VisitorModel = {
-                imgpath: faker.image.imageUrl(),
+                id: '',
+                imgpath: faker.image.avatar(),
                 name: faker.name.findName(),
                 position: faker.name.jobTitle(),
                 company: faker.company.companyName(),
@@ -61,7 +88,11 @@ export class VisitorServices {
                 hp: faker.phone.phoneNumber(),
                 address: faker.address.streetAddress()
             };
-            this.colRef.add(dummyData);
+             this.colRef.add(dummyData).then(x => {
+                 this.colRef.doc(x.id).update({
+                     id: x.id
+                 });
+             });
         }
     }
 

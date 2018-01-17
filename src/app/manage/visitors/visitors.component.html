@@ -28,10 +28,42 @@
 </div>
 -->
 
+<!--Main Buttons-->
+<div class="example-container-top mat-elevation-z1">
+  <button mat-raised-button color="warn" (click)="addOne()">Add a visitor</button>
+  <button mat-raised-button color="warn" (click)="addOneRandom()">Add a random visitor</button>
+  <button mat-raised-button color="warn" (click)="generateData()">Generate 50 Visitors</button>
+  <button mat-raised-button color="warn" (click)="deleteAllVisitors()">Delete Visitors</button>
+</div>
+<!--Main Card-->
+<div class="example-container-top mat-elevation-z4" *ngIf="localvisitor.id !== ''">
+  <table>
+    <tr>
+      <th colspan="4">Visitor Profile</th>
+    </tr>
+    <tr>
+      <td rowspan="4"><img src="{{localvisitor.imgpath}}" alt="{{localvisitor.name}}"></td>
+      <td>Name: {{localvisitor.name}}</td>
+      <td>Company: {{localvisitor.company}}</td>
+      <td>Position: {{localvisitor.position}}</td>
+    </tr>
+    <tr>
+      <td>IC: {{localvisitor.ic}}</td>
+      <td>Email: {{localvisitor.email}}</td>
+      <td>Handphone: {{localvisitor.hp}}</td>
+    </tr>
+    <tr>
+      <td colspan="4">Address: {{localvisitor.address}}</td>
+    </tr>
+    <tr>
+      <td>
+          <button mat-raised-button color="primary">Send SMS</button>
+          <button mat-raised-button color="primary">Send Email</button>
+      </td>      
+    </tr>
+  </table>
+</div>
 <!--Main Table-->
-<button mat-raised-button color="warn" (click)="addOne()">Add a visitor to Firestore</button>
-<button mat-raised-button color="warn" (click)="generateData()">Generate 50 Visitors</button>
-<button mat-raised-button color="warn" (click)="deleteAllVisitors()">Delete Visitors</button>
 <div class="example-container mat-elevation-z8">
   <div class="example-header">
     <mat-form-field>
@@ -55,18 +87,18 @@
     <ng-container matColumnDef="ic">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Identification </mat-header-cell>
       <mat-cell *matCellDef="let visitor"> {{ visitor.ic }} </mat-cell>
-    </ng-container>  
+    </ng-container>
 
     <ng-container matColumnDef="edit">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
-        <mat-cell *matCellDef="let visitor"> 
-          <button mat-raised-button  color="primary" (click)="openDialog(visitor)">Edit</button> 
-          <button mat-raised-button  color="accent" (click)="deleteDialog(visitor)">Delete</button> 
-        </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let visitor">
+        <button mat-raised-button color="primary" (click)="openDialog(visitor)">Edit</button>
+        <button mat-raised-button color="accent" (click)="deleteDialog(visitor)">Delete</button>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="onClick(row)"
+      class="animate"></mat-row>
   </mat-table>
 </div>
-
