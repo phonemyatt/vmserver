@@ -9,7 +9,7 @@ import { MaterializeModule } from 'angular2-materialize';
 import { environment } from './../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-export const firebaseConfig = environment.firebaseCOnfig;
+export const firebaseConfig = environment.firebaseConfig;
 
 
 // Landing Layer

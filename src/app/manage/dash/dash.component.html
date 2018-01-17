@@ -1,6 +1,6 @@
 
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav mode="push" [(opened)]="opened">
+  <mat-sidenav #sidenav mode="push">
     <mat-nav-list>
       <a mat-list-item *ngFor="let routerName of routeNames" 
       (click)="sidenav.toggle();"      
@@ -10,7 +10,7 @@
 
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button mat-fab (click)="sidenav.toggle()"><i class="fa fa-bars"></i></button>
+      <button mat-fab color="warn" (click)="sidenav.toggle()"><mat-icon>home</mat-icon></button>
       <span class="sidenav-title">{{title}}</span>
     </mat-toolbar>
     <router-outlet></router-outlet>

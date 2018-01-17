@@ -1,4 +1,28 @@
+<div class="dialog-container">
+<h5>{{title}}</h5>
 <mat-form-field>
-  <input matInput [(ngModel)] = "newEmail" placeholder="new email address">
+  <input matInput [(ngModel)]= "visitor.imgpath" placeholder="new picture">
 </mat-form-field>
-<button mat-raised-button (click)="updateVisitor()">Save</button>"
+<mat-form-field>
+  <input matInput [(ngModel)]= "visitor.name" placeholder="new name">
+</mat-form-field>
+<mat-form-field>
+  <input matInput [(ngModel)]= "visitor.position" placeholder="new position">
+</mat-form-field>
+<mat-form-field>
+  <input matInput [(ngModel)]= "visitor.company" placeholder="new company">
+</mat-form-field>
+<mat-form-field>
+  <input matInput [(ngModel)]= "visitor.ic" placeholder="new identification medium">
+</mat-form-field>
+<mat-form-field>
+  <input matInput [(ngModel)]= "visitor.email" placeholder="new email">
+</mat-form-field>
+<mat-form-field>
+  <input matInput [(ngModel)]= "visitor.hp" placeholder="new handphone">
+</mat-form-field>
+<mat-form-field>
+  <input matInput [(ngModel)]= "visitor.address" placeholder="new address">
+</mat-form-field>
+<button mat-raised-button (click)="updateVisitor()">Save</button>
+</div>

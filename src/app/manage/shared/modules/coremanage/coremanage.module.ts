@@ -14,6 +14,7 @@ import { SecuritiesComponent } from './../../../securities/securities.component'
 
 // Core Visitor Module
 import { EditDialogComponent } from './../../../visitors/edit-dialog/edit-dialog.component';
+import { ConfirmDialogComponent } from './../../../visitors/confirm-dialog/confirm-dialog.component';
 
 // Core Manage Router
 import { CoreManageRoutingModule } from './coremanage-routing.module';
@@ -34,9 +35,15 @@ import { VisitorServices } from '../../../visitors/shared/visitors.service';
     HostsComponent,
     SecuritiesComponent,
     EditDialogComponent,
+    ConfirmDialogComponent,
   ],
   providers: [
     VisitorServices
+  ],
+  entryComponents: [
+    EditDialogComponent,
+    ConfirmDialogComponent
   ]
 })
 export class CoreManageModule { }
+
