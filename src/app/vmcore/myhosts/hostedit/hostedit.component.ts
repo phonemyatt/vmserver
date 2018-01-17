@@ -29,7 +29,7 @@ export class HosteditComponent implements OnInit {
   onClickSaveButton( host: HostModel) {
       this.clickOnSaveHost.emit(this.editHost);
   }
-  onClickCancelButton( host: HostModel ) {
+  onClickCancelButton() {
     this.clickOnCancelHost.emit(this.cacheHost);
   }
 }

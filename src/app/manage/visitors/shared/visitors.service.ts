@@ -32,12 +32,6 @@ export class VisitorServices {
     returnVisitorCollections() {
         return this.afs.collection<VisitorModel>(this.visitorlink);
     }
-
-    // to track visitor
-    trackVisitorByUid(index, item) {
-        return item.uid;
-    }
-
     // Add one visitor
     addOneVisitor(visitor: VisitorModel ) {
         if ( visitor ) {

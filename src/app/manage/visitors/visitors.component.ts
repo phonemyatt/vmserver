@@ -14,7 +14,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 })
 export class VisitorsComponent implements AfterViewInit {
   selectedRowIndex = -1;
-  displayedColumns = ['name', 'company', 'ic' , 'edit'];
+  displayedColumns = ['avatar', 'name', 'company', 'ic' , 'edit'];
   dataSource: MatTableDataSource<VisitorModel>;
   localvisitor: VisitorModel = {
     id: '',
@@ -41,18 +41,18 @@ export class VisitorsComponent implements AfterViewInit {
   // }
 
   ngAfterViewInit() {
-    this.db.returnVisitorCollections().valueChanges().subscribe(data => {
+      this.db.returnVisitorCollections().valueChanges().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
     });
   }
 
-  private onClick(row): void {
+   onClick(row): void {
     this.selectedRowIndex = row.id;
     this.localvisitor = row;
   }
 
-  private openDialog( data ): void {
+   openDialog( data ): void {
     const dialogRef = this.dialog.open( EditDialogComponent, {
       width: '600px',
       height: '700px',
@@ -62,7 +62,7 @@ export class VisitorsComponent implements AfterViewInit {
       this.snackBar.open('Edited a visitor', 'Dismiss', {duration: 2000});
     });
   }
-  private deleteDialog( data ): void {
+   deleteDialog( data ): void {
     // put dialog box here to confirm
     const dialogRef = this.dialog.open( ConfirmDialogComponent, {
       width: '350px',
@@ -84,22 +84,22 @@ export class VisitorsComponent implements AfterViewInit {
             hp: '',
             address: '',
           };
-          this.snackBar.open('Deleted all visitors', 'Dismiss', {duration: 2000});
+          this.snackBar.open('Deleted a visitors', 'Dismiss', {duration: 2000});
       }
     });
   }
 
-  private applyFilter(filterValue: string) {
+   applyFilter(filterValue: string) {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
 
-  private trackByUid(index, item) {
-    return this.db.trackVisitorByUid(index, item);
+  trackByUid(index, item) {
+    return item.uid;
   }
 
-  private addOne() {
+   addOne() {
     // for dialog to create new visitor
     const dialogRef = this.dialog.open( EditDialogComponent, {
       width: '600px',
@@ -111,15 +111,15 @@ export class VisitorsComponent implements AfterViewInit {
     });
   }
 
-  private addOneRandom() {
+   addOneRandom() {
     this.db.addOneRandomVisitor();
   }
 
-  private generateData() {
+   generateData() {
     this.db.generateVisitors(50);
     this.snackBar.open('Generated 50 visitors', 'Dismiss', {duration: 2000});
   }
-  private deleteAllVisitors() {
+   deleteAllVisitors() {
     this.db.deleteCollection('visitors', 5). subscribe();
     this.snackBar.open('Deleted all visitors', 'Dismiss', {duration: 2000});
   }

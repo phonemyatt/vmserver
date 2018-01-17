@@ -43,17 +43,17 @@
     </tr>
     <tr>
       <td rowspan="4"><img src="{{localvisitor.imgpath}}" alt="{{localvisitor.name}}"></td>
-      <td>Name: {{localvisitor.name}}</td>
-      <td>Company: {{localvisitor.company}}</td>
-      <td>Position: {{localvisitor.position}}</td>
+      <td><b>Name:</b> {{localvisitor.name}}</td>
+      <td><b>Company:</b> {{localvisitor.company}}</td>
+      <td><b>Position:</b> {{localvisitor.position}}</td>
     </tr>
     <tr>
-      <td>IC: {{localvisitor.ic}}</td>
-      <td>Email: {{localvisitor.email}}</td>
-      <td>Handphone: {{localvisitor.hp}}</td>
+      <td><b>IC:</b>{{localvisitor.ic}}</td>
+      <td><b>Email:</b>{{localvisitor.email}}</td>
+      <td><b>Handphone:</b>{{localvisitor.hp}}</td>
     </tr>
     <tr>
-      <td colspan="4">Address: {{localvisitor.address}}</td>
+      <td colspan="4"><b>Address:</b>{{localvisitor.address}}</td>
     </tr>
     <tr>
       <td>
@@ -70,7 +70,12 @@
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
   </div>
-  <mat-table #table [dataSource]="dataSource" matSort [trackBy]="trackVisitorByUid" class="animate">
+  <mat-table #table [dataSource]="dataSource" matSort [trackBy]="trackByUid" class="animate">
+
+    <ng-container matColumnDef="avatar">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Avatar </mat-header-cell>
+      <mat-cell *matCellDef="let visitor"><img src="{{ visitor.imgpath }}" width="50px" height="50px"></mat-cell>
+    </ng-container>
 
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>

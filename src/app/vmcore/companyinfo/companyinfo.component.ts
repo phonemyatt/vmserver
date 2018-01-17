@@ -24,8 +24,8 @@ export class CompanyinfoComponent implements OnInit {
               solutions to manufacturing and medical industry
               with clear objectives and success stories to follow.`,
       img: 'https://anewtech.files.wordpress.com/2014/11/anewtech-systems-logo.jpg?w=848',
-      website: 'http://www.anewtech.net',
-      google: 'http://www.google.com/search?q=anewtech+systems',
+      website: 'https://www.anewtech.net',
+      google: 'https://www.google.com/search?q=anewtech+systems',
       facebook: 'https://www.facebook.com/anewtech.net/'
     };
   }
