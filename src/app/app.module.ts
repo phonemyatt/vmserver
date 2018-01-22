@@ -21,6 +21,8 @@ import { SimplereviewComponent } from './simplereview/simplereview.component';
 import { CoreModule } from './vmcore/shared/core.module';
 import { MaterialModule } from './material.module';
 import { CoreManageModule } from './manage/shared/modules/coremanage/coremanage.module';
+// Interceptor for CORS
+import { InterceptorModule } from './manage/shared/modules/coremanage/interceptor.module';
 // material components <-- totally different from materialize-css
 import { AppRoutingModule } from './app-routing.module';
 
@@ -33,6 +35,7 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     BrowserModule,
+    InterceptorModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,

@@ -11,17 +11,25 @@ import { VisitorModel } from './visitormodel';
 export class VisitorServices {
     private visitorlink = 'visitors';
     colRef = this.afs.collection(this.visitorlink, ref => ref.orderBy('__name__'));
-    constructor(private afs: AngularFirestore, private http: HttpClient) {}
+    constructor(private afs: AngularFirestore, private https: HttpClient) {}
+
+    askForTimeNow() {
+        const url = `https://us-central1-vmsystem-4aa54.cloudfunctions.net/timenow`;
+        this.https.get(url).subscribe( (res) => {
+            console.log('just testing: ' + res);
+        });
+    }
 
     sendSms(phoneNumber: string, message: string) {
         const url = `https://us-central1-vmsystem-4aa54.cloudfunctions.net/sendsms`;
-        const headers = {headers: new HttpHeaders({'Content-Type': 'application/json',
-                                                    'Access-Control-Allow-Origin': '*',
-                                                    'Access-Control-Allow-Methods': 'POST',
-                                                    'Access-Control-Allow-Headers': 'Content-Type'
-                                                    })};
+        const headers = { headers: new HttpHeaders({'Content-Type': 'application/json'})}
+        // const headers = {headers: new HttpHeaders({'Content-Type': 'application/json',
+        //                                             'Access-Control-Allow-Origin': '*',
+        //                                             'Access-Control-Allow-Methods': 'POST',
+        //                                             'Access-Control-Allow-Headers': 'Content-Type'
+        //                                             })};
         const body = { text: message, sms: phoneNumber };
-        this.http.post(url, body, headers).subscribe( (res) => {
+        this.https.post(url, body).subscribe( (res) => {
             console.log(res);
         }, (err) => {
             console.log(err);
