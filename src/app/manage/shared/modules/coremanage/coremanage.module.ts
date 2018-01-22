@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MaterializeModule } from 'angular2-materialize';
 import { MaterialModule } from './../../../../material.module';
@@ -25,6 +26,7 @@ import { VisitorServices } from '../../../visitors/shared/visitors.service';
     CommonModule,
     FormsModule,
     RouterModule,
+    HttpClientModule,
     CoreManageRoutingModule,
     MaterializeModule,
     MaterialModule,
