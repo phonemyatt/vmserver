@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpHeaders, HttpClient, HttpResponse } from '@angular/common/http';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
@@ -10,7 +11,22 @@ import { VisitorModel } from './visitormodel';
 export class VisitorServices {
     private visitorlink = 'visitors';
     colRef = this.afs.collection(this.visitorlink, ref => ref.orderBy('__name__'));
-    constructor(private afs: AngularFirestore) {}
+    constructor(private afs: AngularFirestore, private http: HttpClient) {}
+
+    sendSms(phoneNumber: string, message: string) {
+        const url = `https://us-central1-vmsystem-4aa54.cloudfunctions.net/sendsms`;
+        const headers = {headers: new HttpHeaders({'Content-Type': 'application/json',
+                                                    'Access-Control-Allow-Origin': '*',
+                                                    'Access-Control-Allow-Methods': 'POST',
+                                                    'Access-Control-Allow-Headers': 'Content-Type'
+                                                    })};
+        const body = { text: message, sms: phoneNumber };
+        this.http.post(url, body, headers).subscribe( (res) => {
+            console.log(res);
+        }, (err) => {
+            console.log(err);
+        });
+    }
 
     deleteVisitor(visitor: VisitorModel) {
         this.afs.collection(this.visitorlink).doc(visitor.id).delete();

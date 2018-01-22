@@ -40,6 +40,11 @@ export class VisitorsComponent implements AfterViewInit {
   //   this.visitors$ = this.db.colRef.valueChanges();
   // }
 
+  clickToSendSMS(data) {
+    const text = `Dear ${data.name}, Hello from me your dear firebase function.`;
+    this.db.sendSms( data.hp, text);
+  }
+
   ngAfterViewInit() {
       this.db.returnVisitorCollections().valueChanges().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
