@@ -3,16 +3,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const functions = require("firebase-functions");
 //const moment = require('moment');
 const moment = require("moment");
-//const cors = require('cors')({origin: true});
-const cors = require("cors");
-const options = {
-    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
-    credentials: true,
-    methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-    origin: "*",
-    preflightContinue: false
+const nodemailer = require('nodemailer');
+const accountname = functions.config().emailaccount.username;
+const accountpassword = functions.config().emailaccount.password;
+const smtpconfig = {
+    host: 'smtp.anewtech.com.sg',
+    port: 25,
+    secure: false,
+    auth: {
+        user: accountname,
+        pass: accountpassword
+    }
 };
-cors(options);
+const smtpTransport = nodemailer.createTransport(smtpconfig, { from: 'Phonemyatt <phonemyatt.anewtech.com.sg>' });
+const cors = require('cors')({ origin: true });
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 const twilio = require("twilio");
@@ -35,6 +39,9 @@ exports.echopost = functions.https.onRequest((req, res) => {
     }
 });
 exports.timenow = functions.https.onRequest((req, res) => {
+    res.header('Content-Type', 'application/json');
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
     if (req.method !== 'GET') {
         res.status(403).send('Forbidden!');
         return;
@@ -43,6 +50,12 @@ exports.timenow = functions.https.onRequest((req, res) => {
 });
 exports.sendsms = functions.https.onRequest((req, res) => {
     cors(req, res, () => {
+        res.header('Content-Type', 'application/json');
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Content-Type');
+        // store send sms date and time for database
+        //console.log(req);
+        //console.log(res);
         if (req.method !== 'POST') {
             res.status(400).send('Dont anyhow send sms');
             return;
@@ -69,6 +82,41 @@ exports.sendsms = functions.https.onRequest((req, res) => {
             });
         }
         ;
+    });
+});
+//mailer
+exports.sendmail = functions.https.onRequest((req, res) => {
+    cors(req, res, () => {
+        res.header('Content-Type', 'application/json');
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Content-Type');
+        console.log(`${accountname} - ${accountpassword}`);
+        if (req.method !== 'POST') {
+            res.status(400).send('Dont anyhow send email');
+            return;
+        }
+        ;
+        smtpTransport.verify((error, succss) => {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                console.log('Server is ready to take our messages');
+            }
+        });
+        const message = {
+            to: req.body.emailto,
+            subject: 'Hello ✔ from Visitor Management System',
+            text: 'Hello Email?',
+            html: '<b>Hello Email?<b>'
+        };
+        smtpTransport.sendMail(message, (error, info) => {
+            if (error) {
+                console.log(error);
+                return res.status(400).send('Error Send Mail ' + error.message);
+            }
+            return res.status(200).send('Success Send Mail ' + nodemailer.getTextMessageUrl(info));
+        });
     });
 });
 /// Validate E164 format

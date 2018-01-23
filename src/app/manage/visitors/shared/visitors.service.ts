@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
@@ -22,13 +22,16 @@ export class VisitorServices {
 
     sendSms(phoneNumber: string, message: string) {
         const url = `https://us-central1-vmsystem-4aa54.cloudfunctions.net/sendsms`;
-        const headers = { headers: new HttpHeaders({'Content-Type': 'application/json'})}
-        // const headers = {headers: new HttpHeaders({'Content-Type': 'application/json',
+        // const headers = { headers: new HttpHeaders({'Content-Type': 'application/json'})};
+        // const headers = { headers: new HttpHeaders({'Content-Type': 'application/json',
         //                                             'Access-Control-Allow-Origin': '*',
         //                                             'Access-Control-Allow-Methods': 'POST',
         //                                             'Access-Control-Allow-Headers': 'Content-Type'
         //                                             })};
-        const body = { text: message, sms: phoneNumber };
+        const body = {
+            text: message,
+            sms: phoneNumber
+        };
         this.https.post(url, body).subscribe( (res) => {
             console.log(res);
         }, (err) => {
