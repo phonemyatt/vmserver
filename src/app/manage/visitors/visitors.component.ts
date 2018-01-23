@@ -40,6 +40,9 @@ export class VisitorsComponent implements AfterViewInit {
   //   this.visitors$ = this.db.colRef.valueChanges();
   // }
 
+  clickToAskTime() {
+    this.db.askForTimeNow();
+  }
   clickToSendSMS(data) {
     const text = `Dear ${data.name}, Hello from me your dear firebase function.`;
     this.db.sendSms( data.hp, text);
