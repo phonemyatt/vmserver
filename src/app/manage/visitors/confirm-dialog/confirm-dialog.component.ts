@@ -8,7 +8,7 @@ import { VisitorModel } from './../shared/visitormodel';
   templateUrl: './confirm-dialog.component.html',
   styleUrls: ['./confirm-dialog.component.css']
 })
-export class ConfirmDialogComponent {
+export class ConfirmVisitorDialogComponent {
   visitor: VisitorModel = {
     id: '',
     imgpath: '',
@@ -22,7 +22,7 @@ export class ConfirmDialogComponent {
   };
   constructor(
     private afs: VisitorServices,
-    public dialogRef: MatDialogRef<ConfirmDialogComponent>,
+    public dialogRef: MatDialogRef<ConfirmVisitorDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       this.visitor.id = data.id;
         this.visitor.imgpath = data.imgpath;

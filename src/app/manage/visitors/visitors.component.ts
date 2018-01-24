@@ -4,8 +4,8 @@ import { VisitorServices } from './shared/visitors.service';
 import { Observable } from 'rxjs/Observable';
 import { MatTableDataSource, MatSort, MatDialog, MatSnackBar } from '@angular/material';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
-import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { EditVisitorDialogComponent } from './edit-dialog/edit-dialog.component';
+import { ConfirmVisitorDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-visitors',
@@ -40,12 +40,15 @@ export class VisitorsComponent implements AfterViewInit {
   //   this.visitors$ = this.db.colRef.valueChanges();
   // }
 
-  clickToAskTime() {
-    this.db.askForTimeNow();
+  clickToSendEmail(data) {
+    const text = `Dear ${data.name}, Hello from me your firebase email function.`;
+    this.db.sendEmail(data.email, text);
+    this.snackBar.open(`Send generated email to ${data.name}`, 'Dismiss', {duration: 2000});
   }
   clickToSendSMS(data) {
     const text = `Dear ${data.name}, Hello from me your dear firebase function.`;
     this.db.sendSms( data.hp, text);
+    this.snackBar.open(`Send generated sms to ${data.name}`, 'Dismiss', {duration: 2000});
   }
 
   ngAfterViewInit() {
@@ -61,7 +64,7 @@ export class VisitorsComponent implements AfterViewInit {
   }
 
    openDialog( data ): void {
-    const dialogRef = this.dialog.open( EditDialogComponent, {
+    const dialogRef = this.dialog.open( EditVisitorDialogComponent, {
       width: '600px',
       height: '700px',
       data: data
@@ -72,7 +75,7 @@ export class VisitorsComponent implements AfterViewInit {
   }
    deleteDialog( data ): void {
     // put dialog box here to confirm
-    const dialogRef = this.dialog.open( ConfirmDialogComponent, {
+    const dialogRef = this.dialog.open( ConfirmVisitorDialogComponent, {
       width: '350px',
       data: data
     });
@@ -109,7 +112,7 @@ export class VisitorsComponent implements AfterViewInit {
 
    addOne() {
     // for dialog to create new visitor
-    const dialogRef = this.dialog.open( EditDialogComponent, {
+    const dialogRef = this.dialog.open( EditVisitorDialogComponent, {
       width: '600px',
       height: '700px',
       data: 'new'
@@ -128,7 +131,7 @@ export class VisitorsComponent implements AfterViewInit {
     this.snackBar.open('Generated 50 visitors', 'Dismiss', {duration: 2000});
   }
    deleteAllVisitors() {
-    this.db.deleteCollection('visitors', 5). subscribe();
+    this.db.deleteVisitorCollection('visitors', 5). subscribe();
     this.snackBar.open('Deleted all visitors', 'Dismiss', {duration: 2000});
   }
 

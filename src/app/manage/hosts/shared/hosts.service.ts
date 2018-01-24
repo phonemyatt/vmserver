@@ -5,12 +5,12 @@ import { Observable } from 'rxjs/Observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { expand, takeWhile, mergeMap, take } from 'rxjs/operators';
 import * as faker from 'faker'; // optional
-import { VisitorModel } from './visitormodel';
+import { HostModel } from './hostmodel';
 
 @Injectable()
-export class VisitorServices {
-    private visitorlink = 'visitors';
-    colRef = this.afs.collection(this.visitorlink, ref => ref.orderBy('__name__'));
+export class HostServices {
+    private hostlink = 'hosts';
+    colRef = this.afs.collection(this.hostlink, ref => ref.orderBy('__name__'));
     constructor(private afs: AngularFirestore, private https: HttpClient) {}
 
     sendEmail(email: string, message: string) {
@@ -46,40 +46,40 @@ export class VisitorServices {
         });
     }
 
-    deleteVisitor(visitor: VisitorModel) {
-        this.afs.collection(this.visitorlink).doc(visitor.id).delete();
+    deleteHost(host: HostModel) {
+        this.afs.collection(this.hostlink).doc(host.id).delete();
     }
 
-    updateVisitor(visitor: VisitorModel) {
-        this.afs.collection(this.visitorlink).doc(visitor.id).update({
-            imgpath: visitor.imgpath,
-            name: visitor.name,
-            position: visitor.position,
-            company: visitor.company,
-            ic: visitor.ic,
-            email: visitor.email,
-            hp: visitor.hp,
-            address: visitor.address
+    updateHost(host: HostModel) {
+        this.afs.collection(this.hostlink).doc(host.id).update({
+            imgpath: host.imgpath,
+            name: host.name,
+            position: host.position,
+            company: host.company,
+            ic: host.ic,
+            email: host.email,
+            hp: host.hp,
+            address: host.address
         });
     }
     // return firestore collection to table
-    returnVisitorCollections() {
-        return this.afs.collection<VisitorModel>(this.visitorlink);
+    returnHostCollections() {
+        return this.afs.collection<HostModel>(this.hostlink);
     }
-    // Add one visitor
-    addOneVisitor(visitor: VisitorModel ) {
-        if ( visitor ) {
-            this.colRef.add(visitor).then(x => {
-                this.afs.collection(this.visitorlink).doc(x.id).update({
+    // Add one host
+    addOneHost(host: HostModel ) {
+        if ( host ) {
+            this.colRef.add(host).then(x => {
+                this.afs.collection(this.hostlink).doc(x.id).update({
                     id: x.id
                 });
             });
         }
     }
 
-    // Add one Random Visitor
-    addOneRandomVisitor() {
-        const visitor: VisitorModel = {
+    // Add one Random host
+    addOneRandomHost() {
+        const host: HostModel = {
                 id: '',
                 imgpath: faker.image.avatar(),
                 name: faker.name.findName(),
@@ -90,22 +90,22 @@ export class VisitorServices {
                 hp: faker.phone.phoneNumber(),
                 address: faker.address.streetAddress()
         };
-        this.colRef.add(visitor).then(x => {
-            this.afs.collection(this.visitorlink).doc(x.id).update({
+        this.colRef.add(host).then(x => {
+            this.afs.collection(this.hostlink).doc(x.id).update({
                 id: x.id
             });
         });
-        // this.afs.collection(this.visitorlink).add(visitor).then(x => {
-        //     this.afs.collection(this.visitorlink).doc(x.id).update({
+        // this.afs.collection(this.hostlink).add(host).then(x => {
+        //     this.afs.collection(this.hostlink).doc(x.id).update({
         //         id: x.id
         //     });
         // });
     }
 
-    // Helper to quickly generate dummy visitor data
-    generateVisitors(size: number) {
+    // Helper to quickly generate dummy host data
+    generateHosts(size: number) {
         for (const i of Array(size)) {
-            const dummyData: VisitorModel = {
+            const dummyData: HostModel = {
                 id: '',
                 imgpath: faker.image.avatar(),
                 name: faker.name.findName(),
@@ -124,7 +124,7 @@ export class VisitorServices {
         }
     }
 
-    deleteVisitorCollection(path: string, batchSize: number): Observable<any> {
+    deleteHostCollection(path: string, batchSize: number): Observable<any> {
         const source = this.deleteBatch(path, batchSize);
         // expand will call deleteBatch recursively until the collection is deleted
         return source.pipe(
