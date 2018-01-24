@@ -1,4 +1,4 @@
-export interface VisitorModel {
+export interface HostModel {
     id?: string;
     imgpath?: string;
     name?: string;

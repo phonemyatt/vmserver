@@ -1,0 +1,29 @@
+<div class="dialog-container">
+  <h5>{{title}}</h5>
+  <mat-form-field>
+    <input matInput [(ngModel)]= "host.imgpath" placeholder="new picture">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]= "host.name" placeholder="new name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]= "host.position" placeholder="new position">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]= "host.company" placeholder="new company">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]= "host.ic" placeholder="new identification medium">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]= "host.email" placeholder="new email">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]= "host.hp" placeholder="new handphone">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]= "host.address" placeholder="new address">
+  </mat-form-field>
+  <button mat-raised-button (click)="updateHost()">Save</button>
+  </div>
+  

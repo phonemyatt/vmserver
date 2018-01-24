@@ -8,14 +8,18 @@ const accountname = functions.config().emailaccount.username;
 const accountpassword = functions.config().emailaccount.password;
 const smtpconfig = {
     host: 'smtp.anewtech.com.sg',
-    port: 25,
+    port: 587,
     secure: false,
     auth: {
         user: accountname,
         pass: accountpassword
+    },
+    tls: {
+        // do not fail on invalid certs
+        rejectUnauthorized: false
     }
 };
-const smtpTransport = nodemailer.createTransport(smtpconfig, { from: 'Phonemyatt <phonemyatt.anewtech.com.sg>' });
+const smtpTransport = nodemailer.createTransport(smtpconfig, { from: `"Admin" <${accountname}>` });
 const cors = require('cors')({ origin: true });
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
@@ -53,9 +57,7 @@ exports.sendsms = functions.https.onRequest((req, res) => {
         res.header('Content-Type', 'application/json');
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Headers', 'Content-Type');
-        // store send sms date and time for database
-        //console.log(req);
-        //console.log(res);
+        // store send sms date and time for database 
         if (req.method !== 'POST') {
             res.status(400).send('Dont anyhow send sms');
             return;
@@ -68,7 +70,6 @@ exports.sendsms = functions.https.onRequest((req, res) => {
         if (req.get('Content-Type')) {
             const phoneMessage = req.body.text;
             const phoneNumber = req.body.sms;
-            console.log(`${phoneMessage} - ${phoneNumber}`);
             res.status(200).type(req.get('Content-Type')).send(req.body);
             const textMessage = {
                 to: phoneNumber,
@@ -76,8 +77,10 @@ exports.sendsms = functions.https.onRequest((req, res) => {
                 body: phoneMessage,
             };
             return client.messages.create(textMessage).then(data => {
+                // success go to database
                 console.log('Success');
             }).catch(err => {
+                // error record in database
                 console.log(err);
             });
         }
@@ -90,33 +93,42 @@ exports.sendmail = functions.https.onRequest((req, res) => {
         res.header('Content-Type', 'application/json');
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Headers', 'Content-Type');
-        console.log(`${accountname} - ${accountpassword}`);
         if (req.method !== 'POST') {
             res.status(400).send('Dont anyhow send email');
             return;
         }
         ;
-        smtpTransport.verify((error, succss) => {
-            if (error) {
-                console.log(error);
-            }
-            else {
-                console.log('Server is ready to take our messages');
-            }
-        });
-        const message = {
-            to: req.body.emailto,
-            subject: 'Hello ✔ from Visitor Management System',
-            text: 'Hello Email?',
-            html: '<b>Hello Email?<b>'
-        };
-        smtpTransport.sendMail(message, (error, info) => {
-            if (error) {
-                console.log(error);
-                return res.status(400).send('Error Send Mail ' + error.message);
-            }
-            return res.status(200).send('Success Send Mail ' + nodemailer.getTextMessageUrl(info));
-        });
+        // for verification purpose
+        // smtpTransport.verify((error, succss) => {
+        //     if ( error ) {
+        //         // verification error                
+        //         res.status(400).send('Cant verifiy');
+        //         return;             
+        //     }
+        //     else {
+        //         console.log('Server is ready to send message');
+        //     }           
+        // });
+        if (req.get('Content-Type')) {
+            const emailto = req.body.emailto;
+            const emailMessage = req.body.text;
+            res.status(200).type(req.get('Content-Type')).send(req.body);
+            const email = {
+                to: emailto,
+                subject: 'Hello ✔ from Visitor Management System',
+                text: emailMessage,
+                html: `<b>${emailMessage}<b>`
+            };
+            return smtpTransport.sendMail(email, (err, info) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(400).send('Error Send Mail ' + err.message);
+                }
+                else {
+                    return res.status(200).send('Success Send Mail ' + nodemailer.getTextMessageUrl(info));
+                }
+            });
+        }
     });
 });
 /// Validate E164 format

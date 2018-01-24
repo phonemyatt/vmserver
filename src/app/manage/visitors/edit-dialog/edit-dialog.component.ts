@@ -8,7 +8,7 @@ import { VisitorModel } from './../shared/visitormodel';
   templateUrl: './edit-dialog.component.html',
   styleUrls: ['./edit-dialog.component.css']
 })
-export class EditDialogComponent {
+export class EditVisitorDialogComponent {
   title: string;
   visitor: VisitorModel = {
     id: '',
@@ -24,7 +24,7 @@ export class EditDialogComponent {
 
   constructor(
     private vs: VisitorServices,
-    public dialogRef: MatDialogRef<EditDialogComponent>,
+    public dialogRef: MatDialogRef<EditVisitorDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       if ( data === 'new' ) {
         this.title = 'New Visitor Profile';

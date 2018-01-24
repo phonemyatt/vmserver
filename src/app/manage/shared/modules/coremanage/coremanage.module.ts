@@ -14,12 +14,17 @@ import { HostsComponent } from './../../../hosts/hosts.component';
 import { SecuritiesComponent } from './../../../securities/securities.component';
 
 // Core Visitor Module
-import { EditDialogComponent } from './../../../visitors/edit-dialog/edit-dialog.component';
-import { ConfirmDialogComponent } from './../../../visitors/confirm-dialog/confirm-dialog.component';
+import { EditVisitorDialogComponent } from './../../../visitors/edit-dialog/edit-dialog.component';
+import { ConfirmVisitorDialogComponent } from './../../../visitors/confirm-dialog/confirm-dialog.component';
+
+// Core Host Module
+import { EditHostDialogComponent } from './../../../hosts/edit-dialog/edit-dialog.component';
+import { ConfirmHostDialogComponent } from './../../../hosts/confirm-dialog/confirm-dialog.component';
 
 // Core Manage Router
 import { CoreManageRoutingModule } from './coremanage-routing.module';
-import { VisitorServices } from '../../../visitors/shared/visitors.service';
+import { VisitorServices } from './../../../visitors/shared/visitors.service';
+import { HostServices } from './../../../hosts/shared/hosts.service';
 
 @NgModule({
   imports: [
@@ -36,15 +41,20 @@ import { VisitorServices } from '../../../visitors/shared/visitors.service';
     VisitorsComponent,
     HostsComponent,
     SecuritiesComponent,
-    EditDialogComponent,
-    ConfirmDialogComponent,
+    EditVisitorDialogComponent,
+    ConfirmVisitorDialogComponent,
+    EditHostDialogComponent,
+    ConfirmHostDialogComponent,
   ],
   providers: [
-    VisitorServices
+    VisitorServices,
+    HostServices
   ],
   entryComponents: [
-    EditDialogComponent,
-    ConfirmDialogComponent
+    EditVisitorDialogComponent,
+    ConfirmVisitorDialogComponent,
+    EditHostDialogComponent,
+    ConfirmHostDialogComponent
   ]
 })
 export class CoreManageModule { }
