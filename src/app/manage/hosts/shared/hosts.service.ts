@@ -47,6 +47,7 @@ export class HostServices {
     }
 
     deleteHost(host: HostModel) {
+        console.log(host.id);
         this.afs.collection(this.hostlink).doc(host.id).delete();
     }
 

@@ -39,7 +39,7 @@ export class ConfirmHostDialogComponent {
   }
 
   onConfirm(): void {
-  //  this.afs.deletehost(this.host);
+    this.afs.deleteHost(this.host);
     this.dialogRef.close('Yes');
   }
 
