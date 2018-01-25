@@ -19,7 +19,6 @@ export class VisitorServices {
             emailto: email,
             text: message
         };
-
         this.https.post(url, body).subscribe( (res) => {
             console.log(res);
         }, (err) => {

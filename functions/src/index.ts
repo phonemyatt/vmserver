@@ -1,6 +1,8 @@
 import * as functions from 'firebase-functions';
 //const moment = require('moment');
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
+
+import * as crypto from 'crypto';
 
 const nodemailer = require('nodemailer');
 
@@ -28,6 +30,14 @@ const cors = require('cors')({origin: true});
 
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
+const db = admin.firestore();
+
+const visitorColRef = db.collection('visitors', ref => ref.orderBy('__name__'));
+const visitorRef = db.collection('visitors');
+// const hostColRef = db.collection('hosts', ref => ref.orderBy('__name__'));
+// const hostRef = db.collection('hosts');
+const logColRef = db.collection('logs', ref => ref.orderBy('__name__'));
+const logRef = db.collection('logs');
 
 import * as twilio from 'twilio';
 const accountSid = functions.config().twilio.sid;
@@ -37,19 +47,19 @@ const client = new twilio(accountSid,authToken);
 const twilioNumber = '+13213166744';
 
 export const testrequest = functions.https.onRequest((req, res) => {   
-    res.status(200).send('Success from firebase');
+    return res.status(200).send('Success from firebase');
 });
 
-export const echopost = functions.https.onRequest((req, res) => {
-    console.log(req.body);   
+export const echopost = functions.https.onRequest( (req, res) => {
+    // console.log(req.body);   
     if (req.method !== 'POST') {
-        res.status(400).send('Dont post it wrong');
-        return;
-    }
+        return res.status(400).send('Dont post it wrong');        
+    };
     if (req.get('Content-Type')) {
         console.log('Content-Type: ' + req.get('Content-Type'));
-        res.status(200).type(req.get('Content-Type')).send(req.body);
-    }
+        return res.status(200).type('application/json').send(req.body);
+    };
+    return res.status(404).send('Not JSON!');
 });
 
 export const timenow = functions.https.onRequest((req, res) => {
@@ -58,11 +68,13 @@ export const timenow = functions.https.onRequest((req, res) => {
     res.header('Access-Control-Allow-Headers', 'Content-Type');  
     
     if ( req.method !== 'GET') {
-        res.status(403).send('Forbidden!');
-        return;
-    }
-    res.status(200).send( moment().toISOString() );
-
+        return res.status(400).send('Dont call it wrong');        
+    };
+    // const mytime = {
+    //     timenow: moment().tz('Asia/Singapore').format()
+    // };
+    // return res.status(200).type('application/json').send( mytime );
+    return res.status(200).send( moment().tz('Asia/Singapore').format() );
 });
 
 export const sendsms = functions.https.onRequest((req,res) => {      
@@ -73,33 +85,33 @@ export const sendsms = functions.https.onRequest((req,res) => {
     // store send sms date and time for database 
 
     if ( req.method !== 'POST' ) {
-        res.status(400).send('Dont anyhow send sms');
-        return;
+        return res.status(400).send('Dont anyhow send sms');        
     };
-    if ( !validE164( req.body.sms ) ) {        
-        throw new Error('number must be E164 format!');    
+    if ( !validE164( req.body.sms ) ) {      
+        throw new Error('number must be E164 format!');            
     }
         
         // req body with sms is true
     if ( req.get('Content-Type') ) {
         const phoneMessage = req.body.text;
         const phoneNumber = req.body.sms;        
-        res.status(200).type(req.get('Content-Type')).send( req.body );
+        res.status(200).type('application/json').send( req.body );
         const textMessage = {
         to: phoneNumber,
         from: twilioNumber,
         body: phoneMessage,
         };
-    return client.messages.create(textMessage).then(data => {
-        // success go to database
-        console.log('Success');
-        }).catch(err => {
-            // error record in database
-            console.log(err);
+        return client.messages.create(textMessage).then(data => {
+            // success go to database
+            console.log('Success');
+            }).catch(err => {
+                // error record in database
+                console.log(err);
             });
-    };    
-
+        };    
+        return res.status(404).send('Not JSON!');
     });
+    
 });
 
 //mailer
@@ -111,8 +123,7 @@ export const sendmail = functions.https.onRequest( (req, res) => {
         res.header('Access-Control-Allow-Headers', 'Content-Type');  
 
         if ( req.method !== 'POST' ) {
-            res.status(400).send('Dont anyhow send email');
-            return;
+            return res.status(400).send('Dont anyhow send email');            
         };
 
         // for verification purpose
@@ -130,7 +141,7 @@ export const sendmail = functions.https.onRequest( (req, res) => {
         if ( req.get('Content-Type') ) {
             const emailto = req.body.emailto;
             const emailMessage = req.body.text;
-            res.status(200).type(req.get('Content-Type')).send( req.body );
+            res.status(200).type('application/json').send( req.body );
             const email = {         
                 to: emailto,
                 subject: 'Hello ✔ from Visitor Management System',
@@ -145,8 +156,83 @@ export const sendmail = functions.https.onRequest( (req, res) => {
                     return res.status(200).send('Success Send Mail ' + nodemailer.getTextMessageUrl(info));
                 }            
             });
-        }       
-    }) ;
+        };
+        
+        return res.status(404).send('Not JSON!');
+    });
+});
+
+export const postlogin = functions.https.onRequest( (req,res) => {
+    cors(req, res, ()=> {
+        res.header('Content-Type','application/json');
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+        if ( req.method !== 'POST' ) {
+            return res.status(400).type('application/json').send('Dont anyhow login');
+        };
+
+        if ( req.get('Content-Type') ) {
+
+            // randomtoken to generate visitor tokens. 6 values
+            const loginModel =  {
+                timein : req.body.timenow || '' ,                
+                host: req.body.hostid || '',
+                vtoken: randomtoken(6)
+            }     
+            
+            const visitorModel = {
+                imgpath: req.body.imgpath || 'https://s3.amazonaws.com/uifaces/faces/twitter/linux29/128.jpg',
+                name: req.body.name || '',
+                position: req.body.position || '',
+                company: req.body.company || '',
+                ic: req.body.ic || '',
+                email: req.body.email || '',
+                hp: req.body.hp || '',
+                address: req.body.address || ''
+            }
+            
+            res.status(200).type('application/json').send(req.body);
+
+            // add to visitor, update visitor id
+             // add to log with visitor id, update log id, 
+            return visitorColRef.add(visitorModel).then(x => {
+                visitorRef.doc(x.id).update({
+                    id: x.id
+                });                
+                return logColRef.add(loginModel).then(y => {
+                    logRef.doc(y.id).update({
+                        id: y.id,
+                        visitor: x.id                 
+                    });
+                    console.log('Log added');                
+                });
+            });
+        };
+        return res.status(404).send('Not JSON!');
+    });
+});
+
+export const postlogout = functions.https.onRequest( (req, res) => {
+    cors(req, res, () => {
+        res.header('Content-Type','application/json');
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+        if ( req.method !== 'POST' ) {
+            return res.status(400).type('application/json').send('Dont anyhow login');
+        };
+
+        if ( req.get('Content-Type') ) {
+            // const timeout = req.body.timenow || '';
+            // const token = req.body.token || '';
+            // const name = req.body.name || '';            
+            // const hp = req.body.number || '';
+            res.status(200).type('application/json').send(req.body);            
+        };
+
+        return res.status(404).send('Not JSON!');
+    })
 });
 
 
@@ -155,3 +241,30 @@ export function validE164( num ) {
     return /^\+?[1-9]\d{1,14}$/.test(num)
 }
 
+// Random token generator with crypto
+export function randomtoken( howMany ){
+    const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+    
+    const rand = crypto.randomBytes(howMany)
+    const value = new Array( howMany );
+    const len = chars.length;
+    for ( let i = 0; i< howMany; i++) {
+        value[i] = chars[rand[i] % len]
+    };
+    return value.join('');
+}
+
+
+// export const example = functions.https.onRequest( (req, res) => {
+//     cors(req, res, () => {
+//         res.header('Content-Type','application/json');
+//         res.header('Access-Control-Allow-Origin', '*');
+//         res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+//         if ( req.method !== 'POST' ) {
+//             return res.status(400).type('application/json').send('Dont anyhow login');
+//         }
+
+//         return res.status(404).send('Not JSON!');
+//     })
+// });

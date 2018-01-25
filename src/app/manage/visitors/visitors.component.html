@@ -97,8 +97,8 @@
     <ng-container matColumnDef="edit">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
       <mat-cell *matCellDef="let visitor">
-        <button mat-raised-button color="primary" (click)="openDialog(visitor)">Edit</button>
-        <button mat-raised-button color="accent" (click)="deleteDialog(visitor)">Delete</button>
+        <button mat-raised-button color="primary" (click)="openVisitorDialog(visitor)">Edit</button>
+        <button mat-raised-button color="accent" (click)="deleteVisitorDialog(visitor)">Delete</button>
       </mat-cell>
     </ng-container>
 

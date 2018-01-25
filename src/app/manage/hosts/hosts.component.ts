@@ -64,7 +64,7 @@ export class HostsComponent implements AfterViewInit {
     this.localhost = row;
   }
 
-   openDialog( data ): void {
+   openHostDialog( data ): void {
     const dialogRef = this.dialog.open( EditHostDialogComponent, {
       width: '600px',
       height: '700px',
@@ -74,7 +74,7 @@ export class HostsComponent implements AfterViewInit {
       this.snackBar.open('Edited a host', 'Dismiss', {duration: 2000});
     });
   }
-   deleteDialog( data ): void {
+   deleteHostDialog( data ): void {
     // put dialog box here to confirm
     const dialogRef = this.dialog.open( ConfirmHostDialogComponent, {
       width: '350px',

@@ -63,7 +63,7 @@ export class VisitorsComponent implements AfterViewInit {
     this.localvisitor = row;
   }
 
-   openDialog( data ): void {
+   openVisitorDialog( data ): void {
     const dialogRef = this.dialog.open( EditVisitorDialogComponent, {
       width: '600px',
       height: '700px',
@@ -73,7 +73,7 @@ export class VisitorsComponent implements AfterViewInit {
       this.snackBar.open('Edited a visitor', 'Dismiss', {duration: 2000});
     });
   }
-   deleteDialog( data ): void {
+   deleteVisitorDialog( data ): void {
     // put dialog box here to confirm
     const dialogRef = this.dialog.open( ConfirmVisitorDialogComponent, {
       width: '350px',
