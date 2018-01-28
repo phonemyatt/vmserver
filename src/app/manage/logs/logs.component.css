@@ -1,0 +1,118 @@
+table {
+  border: none;
+  width: 100%;
+}
+
+th {
+  text-align: center;
+}
+
+td {
+  padding: 2px;
+  text-align: left;
+}
+
+.example-container-top {
+  margin: 5px auto;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  min-width: 300px;
+}
+
+.example-container {
+  margin: 5px auto;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.highlight {
+  background: #5DED69;
+  /* green */
+}
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+}
+
+.mat-accent {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.mat-raised-button {
+  margin: 5px auto;
+}
+
+@-webkit-keyframes fadeIt {
+  0% {
+    background-color: #FFFFFF;
+  }
+  50% {
+    background-color: #98FB98;
+  }
+  100% {
+    background-color: #FFFFFF;
+  }
+}
+
+.animate {
+  background-image: none !important;
+  animation: fadeIt 1s ease-in-out
+}
+
+.footer {
+  position: fixed;
+  height: 350px;
+  left: auto;
+  bottom: 0;
+  width: 100%;
+  color: black;
+  text-align: center;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+}
+
+/* Clear floats after the columns */
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.card {
+  /* Add shadows to create the "card" effect */
+  padding: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  /* 5px rounded corners */
+}
+
+/* On mouse-over, add a deeper shadow */
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Add some padding inside the card container */
+
+.container {
+  padding: 2px 16px;
+}

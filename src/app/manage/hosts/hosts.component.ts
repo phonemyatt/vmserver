@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { HostModel } from './shared/hostmodel';
+import { HostModel, HostUIModel } from './shared/hostmodel';
 import { HostServices } from './shared/hosts.service';
 import { Observable } from 'rxjs/Observable';
 import { MatTableDataSource, MatSort, MatDialog, MatSnackBar } from '@angular/material';
@@ -16,15 +16,16 @@ import { ConfirmHostDialogComponent } from './confirm-dialog/confirm-dialog.comp
 export class HostsComponent implements AfterViewInit {
   selectedRowIndex = -1;
   displayedColumns = ['avatar', 'name', 'company', 'ic' , 'edit'];
-  dataSource: MatTableDataSource<HostModel>;
-  localhost: HostModel = {
+  dataSource: MatTableDataSource<HostUIModel>;
+  localhost: HostUIModel = {
     id: '',
     imgpath: '',
     name: '',
     position: '',
     company: '',
     ic: '',
-    email: '',
+    cemail: '',
+    pemail: '',
     hp: '',
     address: '',
   };
@@ -43,7 +44,7 @@ export class HostsComponent implements AfterViewInit {
 
   clickToSendEmail(data) {
     const text = `Dear ${data.name}, Hello from me your firebase email function.`;
-    this.db.sendEmail(data.email, text);
+    this.db.sendEmail(data.pemail, text);
     this.snackBar.open(`Send generated email to ${data.name}`, 'Dismiss', {duration: 2000});
   }
   clickToSendSMS(data) {
@@ -53,13 +54,13 @@ export class HostsComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-      this.db.returnHostCollections().valueChanges().subscribe(data => {
+      this.db.returnHostCollections().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
     });
   }
 
-   onClick(row): void {
+  onClick(row): void {
     this.selectedRowIndex = row.id;
     this.localhost = row;
   }
@@ -92,7 +93,8 @@ export class HostsComponent implements AfterViewInit {
             position: '',
             company: '',
             ic: '',
-            email: '',
+            cemail: '',
+            pemail: '',
             hp: '',
             address: '',
           };
@@ -111,7 +113,7 @@ export class HostsComponent implements AfterViewInit {
     return item.uid;
   }
 
-   addOne() {
+  addOne() {
     // for dialog to create new host
     const dialogRef = this.dialog.open( EditHostDialogComponent, {
       width: '600px',
@@ -123,7 +125,7 @@ export class HostsComponent implements AfterViewInit {
     });
   }
 
-   addOneRandom() {
+  addOneRandom() {
     this.db.addOneRandomHost();
   }
 

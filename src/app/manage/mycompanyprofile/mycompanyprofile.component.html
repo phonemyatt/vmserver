@@ -1,0 +1,46 @@
+<div class="example-container mat-elevation-z1">
+  <table>
+    <tr>
+      <th colspan="2">My Company Profile</th>
+    </tr>
+    <tr>
+        <td colspan="2"><img width="250px" height="250px" src="{{mycompany.imgpath}}" alt="{{mycompany.id}}"></td>
+    </tr>
+    <tr>
+      <td>Name</td>
+      <td>{{mycompany.name}}</td>
+    </tr>
+    <tr>
+      <td>Address</td>
+      <td>{{mycompany.address}}</td>
+    </tr>
+    <tr>
+      <td>Tel</td>
+      <td>{{mycompany.tel}}</td>
+    </tr>
+    <tr>
+      <td>Fax</td>
+      <td>{{mycompany.fax}}</td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td><a href="mailto:{{mycompany.cemail}}" target="_top">{{mycompany.cemail}}</a></td>
+    </tr>
+    <tr>
+      <td>Link</td>
+      <td>          
+        <a  target="_blank" [href]="sanitize(mycompany.homelink)"> <i class="fa fa-link"></i></a>
+        <a  target="_blank" [href]="sanitize(mycompany.fblink)"><i class="fa fa-facebook-official"></i></a>
+        <a  target="_blank" [href]="sanitize(mycompany.googlelink)"><i class="fa fa-google"></i></a>
+      </td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td>{{mycompany.desc}}</td>
+    </tr>
+    <tr>
+      <td>Remark</td>
+      <td>{{mycompany.remark}}</td>
+    </tr>
+  </table>
+</div>

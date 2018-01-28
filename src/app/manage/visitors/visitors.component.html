@@ -29,14 +29,14 @@
 -->
 
 <!--Main Buttons-->
-<div class="example-container-top mat-elevation-z1">
+<div class="example-container-top mat-elevation-z8">
   <button mat-raised-button color="warn" (click)="addOne()">Add a visitor</button>
   <button mat-raised-button color="warn" (click)="addOneRandom()">Add a random visitor</button>
   <button mat-raised-button color="warn" (click)="generateData()">Generate 50 Visitors</button>
   <button mat-raised-button color="warn" (click)="deleteAllVisitors()">Delete Visitors</button>
 </div>
 <!--Main Card-->
-<div class="example-container-top mat-elevation-z4" *ngIf="localvisitor.id !== ''">
+<div class="example-container-bot-fixed mat-elevation-z8" *ngIf="localvisitor.id !== ''">
   <table>
     <tr>
       <th colspan="4">Visitor Profile</th>
@@ -64,7 +64,7 @@
   </table>
 </div>
 <!--Main Table-->
-<div class="example-container mat-elevation-z8">
+<div class="example-container mat-elevation-z4">
   <div class="example-header">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">

@@ -4,34 +4,6 @@
   <button mat-raised-button color="warn" (click)="generateData()">Generate 50 Hosts</button>
   <button mat-raised-button color="warn" (click)="deleteAllHosts()">Delete Hosts</button>
 </div>
-<!--Main Card-->
-<div class="example-container-top mat-elevation-z4" *ngIf="localhost.id !== ''">
-  <table>
-    <tr>
-      <th colspan="4">Host Profile</th>
-    </tr>
-    <tr>
-      <td rowspan="4"><img src="{{localhost.imgpath}}" alt="{{localhost.name}}"></td>
-      <td><b>Name:</b> {{localhost.name}}</td>
-      <td><b>Company:</b> {{localhost.company}}</td>
-      <td><b>Position:</b> {{localhost.position}}</td>
-    </tr>
-    <tr>
-      <td><b>IC:</b>{{localhost.ic}}</td>
-      <td><b>Email:</b>{{localhost.pemail}}</td>
-      <td><b>Handphone:</b>{{localhost.hp}}</td>
-    </tr>
-    <tr>
-      <td colspan="4"><b>Address:</b>{{localhost.address}}</td>
-    </tr>
-    <tr>
-      <td>
-          <button mat-raised-button color="primary" (click)="clickToSendSMS(localhost)">Send SMS</button>
-          <button mat-raised-button color="primary" (click)="clickToSendEmail(localhost)">Send Email</button>
-      </td>      
-    </tr>
-  </table>
-</div>
 <!--Main Table-->
 <div class="example-container mat-elevation-z8">
   <div class="example-header">
@@ -43,7 +15,9 @@
 
     <ng-container matColumnDef="avatar">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Avatar </mat-header-cell>
-      <mat-cell *matCellDef="let host"><img src="{{ host.imgpath }}" width="50px" height="50px"></mat-cell>
+      <mat-cell *matCellDef="let host">
+        <img src="{{ host.imgpath }}" width="50px" height="50px">
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="name">
@@ -75,4 +49,39 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="onClick(row)"
       class="animate"></mat-row>
   </mat-table>
+</div>
+
+<div class="footer">
+  <div class="row">
+    <div class="column">
+      <div class="card">
+        <h3>Host</h3>
+        <img src="https://customers.accrisoft.com/clientuploads/authorship_profile.jpg" alt="Avatar" style="width:100px;height:100px;">
+        <div class="container">
+          <h4>
+            <b>John Doe</b>
+          </h4>
+          <p>Software Engineer</p>
+          <p>R&D Team</p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <h3>Visitor</h3>
+        <img src="https://customers.accrisoft.com/clientuploads/authorship_profile.jpg" alt="Avatar" style="width:100px;height:100px;">
+        <div class="container">
+          <h4>
+            <b>John Doe</b>
+          </h4>
+          <p>Architect & Engineer</p>
+          <p>Anewtech Systems</p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <h2>Column 3</h2>
+      <p>Some text..</p>
+    </div>
+  </div>
 </div>
