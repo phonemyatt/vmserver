@@ -15,6 +15,9 @@ import { VisitorsComponent } from './../../../visitors/visitors.component';
 import { HostsComponent } from './../../../hosts/hosts.component';
 import { SecuritiesComponent } from './../../../securities/securities.component';
 
+// Core Log Module
+import { ConfirmLogDialogComponent } from './../../../logs/confirm-dialog/confirm-dialog.component';
+
 // Core Visitor Module
 import { EditVisitorDialogComponent } from './../../../visitors/edit-dialog/edit-dialog.component';
 import { ConfirmVisitorDialogComponent } from './../../../visitors/confirm-dialog/confirm-dialog.component';
@@ -47,6 +50,7 @@ import { MyCompanyServices } from './../../../mycompanyprofile/shared/mycompany.
     VisitorsComponent,
     HostsComponent,
     SecuritiesComponent,
+    ConfirmLogDialogComponent,
     EditVisitorDialogComponent,
     ConfirmVisitorDialogComponent,
     EditHostDialogComponent,
@@ -59,6 +63,7 @@ import { MyCompanyServices } from './../../../mycompanyprofile/shared/mycompany.
     MyCompanyServices
   ],
   entryComponents: [
+    ConfirmLogDialogComponent,
     EditVisitorDialogComponent,
     ConfirmVisitorDialogComponent,
     EditHostDialogComponent,

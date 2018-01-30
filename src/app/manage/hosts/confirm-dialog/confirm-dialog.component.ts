@@ -24,7 +24,7 @@ export class ConfirmHostDialogComponent {
   constructor( private afs: HostServices,
     public dialogRef: MatDialogRef<ConfirmHostDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      this.host.id = data.id;
+        this.host.id = data.id;
         this.host.imgpath = data.imgpath;
         this.host.name = data.name;
         this.host.position = data.position;

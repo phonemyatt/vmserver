@@ -10,7 +10,7 @@ import { async } from '@angular/core/testing';
   styleUrls: ['./mycompanyprofile.component.css']
 })
 export class MycompanyprofileComponent implements OnInit {
-  private mycompany: CompanyModel = {
+  mycompany: CompanyModel = {
     id: '',
     imgpath: '',
     name: '',

@@ -75,7 +75,7 @@ td {
 
 .footer {
   position: fixed;
-  height: 350px;
+  height: 400px;
   left: auto;
   bottom: 0;
   width: 100%;
@@ -115,4 +115,10 @@ td {
 
 .container {
   padding: 2px 16px;
+}
+
+.mat-raised-button{
+  width: 100%;
+  padding-left: 10px;
+  margin: 5px auto;
 }

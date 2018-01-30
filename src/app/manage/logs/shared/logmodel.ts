@@ -6,6 +6,7 @@ export interface LogModel {
     host?: string;
     visitor?: string;
     timein?: string;
+    timeout?: string;
     vtoken?: string;
 }
 
@@ -14,5 +15,6 @@ export interface LogUIModel {
     host?: HostModel;
     visitor?: VisitorModel;
     timein?: string;
+    timeout?: string;
     vtoken?: string;
 }

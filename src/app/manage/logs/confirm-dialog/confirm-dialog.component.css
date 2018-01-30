@@ -1,0 +1,9 @@
+button {
+    padding: 10px;
+    margin: 10px;
+  }
+  .dialog-container {
+      display: flex;
+      flex-direction: column;
+  }
+    

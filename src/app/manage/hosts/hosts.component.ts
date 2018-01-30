@@ -43,12 +43,12 @@ export class HostsComponent implements AfterViewInit {
   // }
 
   clickToSendEmail(data) {
-    const text = `Dear ${data.name}, Hello from me your firebase email function.`;
+    const text = `Dear ${data.name}, You have been registered in Visitor Mangement System, Anewtech.`;
     this.db.sendEmail(data.pemail, text);
     this.snackBar.open(`Send generated email to ${data.name}`, 'Dismiss', {duration: 2000});
   }
   clickToSendSMS(data) {
-    const text = `Dear ${data.name}, Hello from me your dear firebase function.`;
+    const text = `Dear ${data.name}, You have been registered in Visitor Mangement System, Anewtech.`;
     this.db.sendSms( data.hp, text);
     this.snackBar.open(`Send generated sms to ${data.name}`, 'Dismiss', {duration: 2000});
   }
