@@ -8,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class DashComponent implements OnInit {
   title: String = 'VMS';
   constructor() { }
-  routeNames =  [{ name: 'Visitors' , link: 'visitors' },
+  routeNames =  [{ name: 'My Company' , link: 'companies' },
+                 { name: 'Logs' , link: 'logs' },
+                 { name: 'Visitors' , link: 'visitors' },
                  { name: 'Hosts' , link: 'hosts' },
                  { name: 'Securities' , link: 'securities' },
                 ];

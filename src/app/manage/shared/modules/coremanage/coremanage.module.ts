@@ -9,9 +9,14 @@ import { MaterialModule } from './../../../../material.module';
 
 // Core Manage Module
 import { DashComponent } from './../../../dash/dash.component';
+import { MycompanyprofileComponent } from './../../../mycompanyprofile/mycompanyprofile.component';
+import { LogsComponent } from './../../../logs/logs.component';
 import { VisitorsComponent } from './../../../visitors/visitors.component';
 import { HostsComponent } from './../../../hosts/hosts.component';
 import { SecuritiesComponent } from './../../../securities/securities.component';
+
+// Core Log Module
+import { ConfirmLogDialogComponent } from './../../../logs/confirm-dialog/confirm-dialog.component';
 
 // Core Visitor Module
 import { EditVisitorDialogComponent } from './../../../visitors/edit-dialog/edit-dialog.component';
@@ -25,6 +30,8 @@ import { ConfirmHostDialogComponent } from './../../../hosts/confirm-dialog/conf
 import { CoreManageRoutingModule } from './coremanage-routing.module';
 import { VisitorServices } from './../../../visitors/shared/visitors.service';
 import { HostServices } from './../../../hosts/shared/hosts.service';
+import { LogServices } from './../../../logs/shared/logs.service';
+import { MyCompanyServices } from './../../../mycompanyprofile/shared/mycompany.service';
 
 @NgModule({
   imports: [
@@ -38,9 +45,12 @@ import { HostServices } from './../../../hosts/shared/hosts.service';
   ],
   declarations: [
     DashComponent,
+    MycompanyprofileComponent,
+    LogsComponent,
     VisitorsComponent,
     HostsComponent,
     SecuritiesComponent,
+    ConfirmLogDialogComponent,
     EditVisitorDialogComponent,
     ConfirmVisitorDialogComponent,
     EditHostDialogComponent,
@@ -48,9 +58,12 @@ import { HostServices } from './../../../hosts/shared/hosts.service';
   ],
   providers: [
     VisitorServices,
-    HostServices
+    HostServices,
+    LogServices,
+    MyCompanyServices
   ],
   entryComponents: [
+    ConfirmLogDialogComponent,
     EditVisitorDialogComponent,
     ConfirmVisitorDialogComponent,
     EditHostDialogComponent,

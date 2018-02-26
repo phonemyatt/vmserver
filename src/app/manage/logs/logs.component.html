@@ -1,0 +1,102 @@
+<!--
+<div class="example-container-top mat-elevation-z1">
+  <button mat-raised-button color="warn" (click)="addOne()">Add a log</button>
+  <button mat-raised-button color="warn" (click)="addOneRandom()">Add a random log</button>
+  <button mat-raised-button color="warn" (click)="generateData()">Generate 50 logs</button>
+  <button mat-raised-button color="warn" (click)="deleteAllHosts()">Delete Logs</button>
+</div>
+-->
+
+<!--Main Table-->
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+  <mat-table #table [dataSource]="dataSource" matSort [trackBy]="trackByUid" class="animate">
+
+    <ng-container matColumnDef="timein">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> TimeIn </mat-header-cell>
+      <mat-cell *matCellDef="let log">{{ log.timein | date:'dd-MM-yyyy HH:mm' }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="timeout">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> TimeOut </mat-header-cell>
+        <mat-cell *matCellDef="let log">{{ log.timeout | date:'dd-MM-yyyy HH:mm' }}</mat-cell>
+      </ng-container>
+
+    <ng-container matColumnDef="visitor">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Visitor </mat-header-cell>
+      <mat-cell *matCellDef="let log"> {{ log.visitor.name }} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="host">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Host </mat-header-cell>
+      <mat-cell *matCellDef="let log"> {{ log.host.name }} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="token">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Token </mat-header-cell>
+      <mat-cell *matCellDef="let log"> {{ log.vtoken }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let log">
+        <button mat-raised-button color="primary" (click)="openHostDialog(log)">Edit</button>
+        <button mat-raised-button color="accent" (click)="deleteHostDialog(log)">Delete</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="onClick(row)"
+      class="animate"></mat-row>
+  </mat-table>
+</div>
+
+<div class="footer" *ngIf="locallog.id !== ''">
+  <div class="row">
+    <div class="column">
+      <div class="card">
+        <h3>Host</h3>
+        <img src="{{locallog.host.imgpath}}" alt="Avatar" style="width:100px;height:100px;">
+        <div class="container">
+          <h4>
+            <b>{{locallog.host.name}}</b>
+          </h4>
+          <p>{{locallog.host.position}}</p>
+          <p>{{locallog.host.ic}}</p>
+          <p>{{locallog.host.hp}}</p>
+          <p>{{locallog.host.pemail}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <h3>Visitor</h3>
+        <img src="{{locallog.visitor.imgpath}}" alt="Avatar" style="width:100px;height:100px;">
+        <div class="container">
+          <h4>
+            <b>{{locallog.visitor.name}}</b>
+          </h4>
+          <p>{{locallog.visitor.position}}</p>
+          <p>{{locallog.visitor.company}}</p>
+          <p>{{locallog.visitor.email}}</p>
+          <p>{{locallog.visitor.hp}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+          <h3>Actions</h3>
+          <div class="container">             
+              <p><button mat-raised-button color="primary" (click)="clickToSendSMS(locallog)">Reminder:Send sms</button></p>
+              <p><button mat-raised-button color="primary" (click)="clickToSendEmail(locallog)">Reminder:Send email</button></p>
+          </div>    
+      </div>       
+    </div>
+  </div>
+</div>

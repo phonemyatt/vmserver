@@ -1,17 +1,56 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { expand, takeWhile, mergeMap, take } from 'rxjs/operators';
 import * as faker from 'faker'; // optional
-import { HostModel } from './hostmodel';
+import { HostModel, HostUIModel } from './hostmodel';
+import { CompanyModel } from './../../mycompanyprofile/shared/companymodel';
 
 @Injectable()
 export class HostServices {
+    private companyid = 'super';
+    private companylink = 'mycompany';
+    private companyinfo: CompanyModel = {
+        id: '',
+        imgpath: '',
+        name: '',
+        desc: '',
+        remark: '',
+        address: '',
+        tel: '',
+        fax: '',
+        cemail: '',
+        homelink: '',
+        fblink: '',
+        googlelink: ''
+    };
+
     private hostlink = 'hosts';
+
+    companyRef = this.afs.doc<CompanyModel>( this.companylink + '/' + this.companyid).ref;
+
     colRef = this.afs.collection(this.hostlink, ref => ref.orderBy('__name__'));
-    constructor(private afs: AngularFirestore, private https: HttpClient) {}
+
+    constructor(private afs: AngularFirestore, private https: HttpClient) {
+        this.companyRef.get().then(result => {
+            if ( result.exists) {
+                this.companyinfo.id = result.data().id;
+                this.companyinfo.imgpath = result.data().imgpath;
+                this.companyinfo.name = result.data().name;
+                this.companyinfo.desc = result.data().desc;
+                this.companyinfo.remark = result.data().remark;
+                this.companyinfo.address = result.data().address;
+                this.companyinfo.tel = result.data().tel;
+                this.companyinfo.fax = result.data().fax;
+                this.companyinfo.cemail = result.data().cemail;
+                this.companyinfo.homelink = result.data().homelink;
+                this.companyinfo.fblink = result.data().fblink;
+                this.companyinfo.googlelink = result.data().googlelink;
+            }
+        });
+    }
 
     sendEmail(email: string, message: string) {
         const url = `https://us-central1-vmsystem-4aa54.cloudfunctions.net/sendmail`;
@@ -48,24 +87,48 @@ export class HostServices {
 
     deleteHost(host: HostModel) {
         console.log(host.id);
-        this.afs.collection(this.hostlink).doc(host.id).delete();
+        this.afs.collection<HostModel>(this.hostlink).doc(host.id).delete();
     }
 
     updateHost(host: HostModel) {
-        this.afs.collection(this.hostlink).doc(host.id).update({
+        this.afs.collection<HostModel>(this.hostlink).doc(host.id).update({
             imgpath: host.imgpath,
             name: host.name,
             position: host.position,
-            company: host.company,
+            companyid: host.companyid,
             ic: host.ic,
-            email: host.email,
-            hp: host.hp,
-            address: host.address
+            pemail: host.pemail,
+            hp: host.hp
         });
     }
     // return firestore collection to table
     returnHostCollections() {
-        return this.afs.collection<HostModel>(this.hostlink);
+        // return this.afs.collection<HostUIModel>(this.hostlink);
+        return this.afs.collection<HostUIModel>(this.hostlink).snapshotChanges().map(results => {
+            return results.map(a => {
+                const data = a.payload.doc.data() as HostModel;
+                const mydata: HostUIModel = {
+                    id: data.id,
+                    imgpath: data.imgpath,
+                    name: data.name,
+                    position: data.position,
+                    company: this.companyinfo.name,
+                    ic: data.ic,
+                    pemail: data.pemail,
+                    cemail: this.companyinfo.cemail,
+                    hp: data.hp,
+                    address: this.companyinfo.address,
+                };
+                return mydata;
+            });
+        });
+        // .ref.get().then(results => {
+        //     results.forEach(item => {
+        //         item.data().company = this.companyinfo.name;
+        //         item.data().address = this.companyinfo.address;
+        //         return item.data();
+        //     });
+        // });
     }
     // Add one host
     addOneHost(host: HostModel ) {
@@ -85,11 +148,10 @@ export class HostServices {
                 imgpath: faker.image.avatar(),
                 name: faker.name.findName(),
                 position: faker.name.jobTitle(),
-                company: faker.company.companyName(),
+                companyid: 'super',
                 ic: faker.internet.password(),
-                email: faker.internet.email(),
+                pemail: faker.internet.email(),
                 hp: faker.phone.phoneNumber(),
-                address: faker.address.streetAddress()
         };
         this.colRef.add(host).then(x => {
             this.afs.collection(this.hostlink).doc(x.id).update({
@@ -111,11 +173,10 @@ export class HostServices {
                 imgpath: faker.image.avatar(),
                 name: faker.name.findName(),
                 position: faker.name.jobTitle(),
-                company: faker.company.companyName(),
+                companyid: 'super',
                 ic: faker.internet.password(),
-                email: faker.internet.email(),
+                pemail: faker.internet.email(),
                 hp: faker.phone.phoneNumber(),
-                address: faker.address.streetAddress()
             };
              this.colRef.add(dummyData).then(x => {
                  this.colRef.doc(x.id).update({

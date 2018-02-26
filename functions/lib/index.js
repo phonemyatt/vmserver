@@ -169,7 +169,7 @@ exports.postlogin = functions.https.onRequest((req, res) => {
                 company: req.body.company || '',
                 ic: req.body.ic || '',
                 email: req.body.email || '',
-                hp: req.body.hp || '',
+                hp: req.body.number || '',
                 address: req.body.address || ''
             };
             res.status(200).type('application/json').send(req.body);
@@ -206,7 +206,19 @@ exports.postlogout = functions.https.onRequest((req, res) => {
             // const token = req.body.token || '';
             // const name = req.body.name || '';            
             // const hp = req.body.number || '';
+            const logoutModel = {
+                timeout: req.body.timenow || '',
+                vtoken: req.body.vtoken || ''
+            };
             res.status(200).type('application/json').send(req.body);
+            return logRef.where('vtoken', '==', logoutModel.vtoken).get().then(results => {
+                results.forEach(doc => {
+                    logRef.doc(doc.id).update({
+                        timeout: logoutModel.timeout
+                    });
+                });
+                console.log('added timeout');
+            });
         }
         ;
         return res.status(404).send('Not JSON!');

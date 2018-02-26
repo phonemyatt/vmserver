@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { HostServices } from './../shared/hosts.service';
-import { HostModel } from './../shared/hostmodel';
+import { HostModel, HostUIModel } from './../shared/hostmodel';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -10,14 +10,15 @@ import { HostModel } from './../shared/hostmodel';
 })
 export class EditHostDialogComponent {
   title: string;
-  host: HostModel = {
+  host: HostUIModel = {
     id: '',
     imgpath: '',
     name: '',
     position: '',
     company: '',
     ic: '',
-    email: '',
+    pemail: '',
+    cemail: '',
     hp: '',
     address: '',
   };
@@ -36,10 +37,13 @@ export class EditHostDialogComponent {
         this.host.position = data.position;
         this.host.company = data.company;
         this.host.ic = data.ic;
-        this.host.email = data.email;
+        this.host.pemail = data.pemail;
+        this.host.cemail = data.cemail;
         this.host.hp = data.hp;
         this.host.address = data.address;
       }
+
+      console.log(this.host.id);
     }
 
   onNoClick(): void {
@@ -47,7 +51,18 @@ export class EditHostDialogComponent {
   }
 
   updateHost(): void {
-    (this.data === 'new') ? this.vs.addOneHost(this.host) : this.vs.updateHost(this.host);
+    const hosttodatabase: HostModel = {
+      id: this.host.id,
+      imgpath: this.host.imgpath,
+      name: this.host.name,
+      position: this.host.position,
+      companyid: 'super',
+      ic: this.host.ic,
+      hp: this.host.hp,
+      pemail: this.host.pemail,
+    };
+
+    (this.data === 'new') ? this.vs.addOneHost(hosttodatabase) : this.vs.updateHost(hosttodatabase);
     this.dialogRef.close();
   }
 
